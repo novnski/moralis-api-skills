@@ -13,20 +13,7 @@
       "name": "web3-skills",
       "description": "Comprehensive Web3 development suite including wallet, NFT, token, DeFi, blockchain APIs, and specialized utilities for Moralis integration",
       "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/web3-wallet-api",
-        "./skills/web3-nft-api",
-        "./skills/web3-token-api",
-        "./skills/web3-defi-api",
-        "./skills/web3-entity-api",
-        "./skills/web3-price-api",
-        "./skills/web3-blockchain-api",
-        "./skills/web3-utils",
-        "./skills/web3-premium"
-      ],
-      "commands": ["./commands/web3-api-key.md"],
-      "agents": ["./agents/web3-developer.md"]
+      "strict": true
     }
   ]
 }
