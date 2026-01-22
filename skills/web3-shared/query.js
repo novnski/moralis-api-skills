@@ -78,22 +78,45 @@ function chainToHex(chain) {
 }
 
 /**
+ * Find .env file by searching upward from a directory
+ * @param {string} startDir - Starting directory
+ * @returns {string} Path to .env file or null
+ */
+function findEnvFile(startDir) {
+  let currentDir = startDir;
+  const root = path.parse(currentDir).root;
+
+  while (currentDir !== root && currentDir !== path.join(currentDir, "..")) {
+    const envPath = path.join(currentDir, ".env");
+    if (fs.existsSync(envPath)) {
+      return envPath;
+    }
+    // Move up one directory
+    const parentDir = path.dirname(currentDir);
+    if (parentDir === currentDir) break;
+    currentDir = parentDir;
+  }
+
+  return null;
+}
+
+/**
  * Read API key from .env file
- * @param {string} skillDir - Skill directory path
+ * Searches upward from skillDir to find .env file
+ * @param {string} skillDir - Starting directory path (defaults to web3-shared)
  * @returns {string} API key
  */
 function getAPIKey(skillDir = __dirname) {
-  const envPath = path.join(skillDir, ".env");
+  const envPath = findEnvFile(skillDir);
 
-  if (!fs.existsSync(envPath)) {
+  if (!envPath) {
     throw new Error(
       "API key not found. Please set it by running:\n" +
         "  /web3-api-key\n\n" +
-        "Or create the file manually:\n" +
-        "  " +
-        envPath +
-        "\n" +
-        "With content: MORALIS_API_KEY=your_key_here",
+        "Or create .env file with:\n" +
+        "  MORALIS_API_KEY=your_key_here\n" +
+        "Searched from: " +
+        skillDir,
     );
   }
 
