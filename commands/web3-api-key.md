@@ -1,11 +1,25 @@
 ---
 name: web3-api-key
-description: Set your Moralis API key for Web3 skills (works for both EVM and Solana)
+description: Set your Moralis API key for Web3 skills. Usage: /web3-api-key <your_api_key_here>
 ---
 
 # Web3 API Key Setup
 
 Set your Moralis API key to start using Web3 skills.
+
+## Usage
+
+Simply run:
+```
+/web3-api-key <paste your API key here>
+```
+
+For example:
+```
+/web3-api-key eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+I'll automatically configure the API key for all 9 Web3 skills at once.
 
 ## Quick Setup
 
