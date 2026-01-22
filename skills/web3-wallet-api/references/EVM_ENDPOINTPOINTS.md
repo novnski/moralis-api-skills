@@ -10,11 +10,6 @@
 - **Description:** Get native token balance (ETH, MATIC, BNB, etc.)
 - **Auto-chain:** Yes (from ?chain parameter)
 
-## Get Token Balances
-- **Endpoint:** `GET /:address/erc20`
-- **Description:** Get all ERC20 token balances
-- **Auto-chain:** Yes
-
 ## Get Token Balances with Prices
 - **Endpoint:** `GET /wallets/:address/tokens`
 - **Description:** Get tokens with USD prices

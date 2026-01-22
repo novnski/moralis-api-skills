@@ -18,7 +18,7 @@ query('/:address/balance', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA9604
 cd $SKILL_DIR
 node -e "
 const { query } = require('./query');
-query('/:address/erc20', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', chain: 'polygon' })
+query('/wallets/:address/tokens', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', chain: 'polygon' })
   .then(data => {
     console.log('Found', data.result.length, 'tokens');
     data.result.slice(0, 5).forEach(token => {

@@ -39,7 +39,7 @@ query('/:network/:address/balance', {
 ### Get Token Holdings
 
 ```javascript
-query('/:address/erc20', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' })
+query('/wallets/:address/tokens', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' })
   .then(data => {
     data.result.forEach(token => {
       console.log(`${token.symbol}: ${token.balance}`);
@@ -129,7 +129,7 @@ query('/:address/balance', {
 ### Arbitrum
 
 ```javascript
-query('/:address/erc20', {
+query('/wallets/:address/tokens', {
   address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
   chain: 'arbitrum'
 });
@@ -169,7 +169,7 @@ query('/:address/balance', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA9604
 async function getWalletSummary(address) {
   const [balance, tokens, nfts] = await Promise.all([
     query('/:address/balance', { address }),
-    query('/:address/erc20', { address, params: { limit: 100 } }),
+    query('/wallets/:address/tokens', { address, params: { limit: 100 } }),
     query('/:address/nft', { address, params: { limit: 10 } })
   ]);
 

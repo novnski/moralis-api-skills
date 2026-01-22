@@ -67,7 +67,7 @@ When users ask about Web3 data:
 cd $SKILL_DIR/web3-wallet-api
 node -e "
 const { query } = require('./query');
-query('/:address/erc20', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' })
+query('/wallets/:address/tokens', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' })
   .then(data => {
     console.log('Tokens:', data.result.length);
     data.result.forEach(t => console.log('- ' + t.symbol + ': ' + t.balance));
