@@ -19,5 +19,6 @@
     "moralis",
     "evm"
   ],
+  "agents": ["./agents/moralis-platform-developer.md"],
   "skills": "./skills/"
 }
