@@ -10,7 +10,8 @@ const path = require("path");
  * - Stream management (create, update, delete, get)
  * - Address management for streams
  * - Status updates (pause/resume)
- * - History and block data retrieval
+ * - History, replay, and block data retrieval
+ * - Settings and stats management
  * - Webhook event monitoring
  *
  * NO external dependencies - uses only Node.js built-in modules
@@ -122,7 +123,7 @@ function getAPIKey(skillDir = __dirname) {
 }
 
 /**
- * Make HTTPS request with method support (GET, POST, PUT, DELETE)
+ * Make HTTPS request with method support (GET, POST, PUT, PATCH, DELETE)
  * @param {string} fullUrl - Complete URL with query params
  * @param {object} headers - Request headers
  * @param {string} method - HTTP method (GET, POST, PUT, DELETE)
@@ -218,16 +219,48 @@ async function query(endpoint, options = {}) {
 
   const baseURL = "https://streams.moralis.io/api/v2.2";
 
+  const normalizeChainParam = (value) => {
+    if (Array.isArray(value)) {
+      return value.map((item) => (typeof item === "string" ? chainToHex(item) : item));
+    }
+    return typeof value === "string" ? chainToHex(value) : value;
+  };
+
+  const normalizedParams = { ...params };
+  if (Object.prototype.hasOwnProperty.call(normalizedParams, "chainId")) {
+    normalizedParams.chainId = normalizeChainParam(normalizedParams.chainId);
+  }
+  if (Object.prototype.hasOwnProperty.call(normalizedParams, "chainIds")) {
+    normalizedParams.chainIds = normalizeChainParam(normalizedParams.chainIds);
+  }
+
+  let normalizedBody = body;
+  if (body && typeof body === "object") {
+    if (
+      Object.prototype.hasOwnProperty.call(body, "chainId") ||
+      Object.prototype.hasOwnProperty.call(body, "chainIds")
+    ) {
+      normalizedBody = { ...body };
+      if (Object.prototype.hasOwnProperty.call(body, "chainId")) {
+        normalizedBody.chainId = normalizeChainParam(body.chainId);
+      }
+      if (Object.prototype.hasOwnProperty.call(body, "chainIds")) {
+        normalizedBody.chainIds = normalizeChainParam(body.chainIds);
+      }
+    }
+  }
+
   // Replace path parameters (e.g., {id} becomes actual ID)
   let endpointPath = endpoint;
   for (const [key, value] of Object.entries(pathParams)) {
-    endpointPath = endpointPath.replace(`{${key}}`, value);
-    endpointPath = endpointPath.replace(`:${key}`, value);
+    const normalizedValue = key === "chainId" ? normalizeChainParam(value) : value;
+    endpointPath = endpointPath.replace(`{${key}}`, normalizedValue);
+    endpointPath = endpointPath.replace(`:${key}`, normalizedValue);
   }
 
   // Build query parameters
   const searchParams = new URLSearchParams();
-  for (const [key, value] of Object.entries(params)) {
+  for (const [key, value] of Object.entries(normalizedParams)) {
     if (Array.isArray(value)) {
       value.forEach((v) => searchParams.append(key, v));
     } else {
@@ -246,11 +279,11 @@ async function query(endpoint, options = {}) {
     Accept: "application/json",
   };
 
-  if (body) {
+  if (normalizedBody) {
     headers["Content-Type"] = "application/json";
   }
 
-  return httpsRequest(fullUrl, headers, method, body);
+  return httpsRequest(fullUrl, headers, method, normalizedBody);
 }
 
 // Export

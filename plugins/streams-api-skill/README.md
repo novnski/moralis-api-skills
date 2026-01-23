@@ -9,7 +9,8 @@ Real-time blockchain event monitoring with webhooks using the [Moralis Streams A
 - **Multiple Event Types** - Monitor transactions, logs, token transfers, NFT transfers, and internal transactions
 - **Address Management** - Add/remove addresses to streams dynamically
 - **Stream Control** - Create, update, delete, pause, and resume streams
-- **History & Analytics** - Get stream history and block data
+- **History & Analytics** - Get stream history, delivery logs, and block data
+- **Replay & Settings** - Replay deliveries and update webhook settings
 
 ## Quick Start
 
@@ -90,11 +91,23 @@ You can also run the shared command (it sets the key for both plugins):
 ### Address Management
 - `GET /streams/evm/{id}/address` - Get all addresses in a stream
 - `POST /streams/evm/{id}/address` - Add an address to a stream
-- `DELETE /streams/evm/{id}/address` - Remove an address from a stream
+- `PATCH /streams/evm/{id}/address` - Remove addresses from a stream
+- `DELETE /streams/evm/{id}/address` - Remove addresses from a stream
 
-### History
-- `GET /streams/evm/{chainId}/block/{blockNumber}` - Get stream history for a block
-- `GET /streams/evm/{chainId}/block-to-webhook/{blockNumber}/{streamId}` - Get block data for a stream
+### Block Data & Delivery
+- `POST /streams/evm/{chainId}/block/{blockNumber}` - Get stream block data
+- `POST /streams/evm/{chainId}/block-to-webhook/{blockNumber}/{streamId}` - Deliver block data to a stream webhook
+
+### History & Logs
+- `GET /history` - Stream history (delivery payloads)
+- `GET /history/logs` - Delivery logs
+- `POST /history/replay/{streamId}/{id}` - Replay a delivery
+
+### Settings & Stats
+- `GET /settings` - Get project settings
+- `POST /settings` - Update project settings
+- `GET /stats` - Overall stats
+- `GET /stats/{streamId}` - Stream stats
 
 ## Supported Chains
 

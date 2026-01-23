@@ -1,8 +1,8 @@
 # Streams API Endpoints Reference
 
-This reference lists the most common Streams API endpoints and request shapes.
+This reference lists Streams API endpoints and request shapes from the swagger file.
 
-## Get All Streams
+## List Streams
 
 ```
 GET /streams/evm
@@ -19,6 +19,8 @@ Query parameters:
 PUT /streams/evm
 ```
 
+Required fields: `webhookUrl`, `description`, `chainIds`.
+
 Request body:
 ```json
 {
@@ -30,34 +32,40 @@ Request body:
   "includeNativeTxs": true,
   "includeContractLogs": true,
   "includeInternalTxs": false,
+  "includeAllTxLogs": false,
+  "getNativeBalances": [
+    { "type": "tx", "selectors": ["0xa9059cbb"] }
+  ],
   "advancedOptions": [
-    {
-      "type": "tx",
-      "selectors": ["0xa9059cbb"]
-    }
+    { "type": "tx", "selectors": ["0xa9059cbb"] }
   ],
   "chainIds": ["0x1", "0x89"],
   "demo": false,
-  "filterSpamAddresses": true
+  "filterPossibleSpamAddresses": true,
+  "triggers": [
+    {
+      "type": "log",
+      "contractAddress": "0x1234...",
+      "functionAbi": { "type": "event", "name": "Transfer", "inputs": [] }
+    }
+  ]
 }
 ```
 
-## Get a Specific Stream
+## Get, Update, or Delete a Stream
 
 ```
 GET /streams/evm/{id}
-```
-
-## Update a Stream
-
-```
 POST /streams/evm/{id}
-```
-
-## Delete a Stream
-
-```
 DELETE /streams/evm/{id}
+```
+
+`POST` supports partial updates (any subset of create fields).
+
+## Duplicate a Stream
+
+```
+POST /streams/evm/{id}/duplicate
 ```
 
 ## Update Stream Status
@@ -73,7 +81,7 @@ Request body:
 }
 ```
 
-## Get Stream Addresses
+## Stream Addresses
 
 ```
 GET /streams/evm/{id}/address
@@ -83,22 +91,14 @@ Query parameters:
 - `limit` (required) - Max 100
 - `cursor` (optional) - For pagination
 
-## Add Address to Stream
-
+Add addresses:
 ```
 POST /streams/evm/{id}/address
 ```
 
-Request body:
-```json
-{
-  "address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb"
-}
+Remove addresses:
 ```
-
-## Delete Address from Stream
-
-```
+PATCH /streams/evm/{id}/address
 DELETE /streams/evm/{id}/address
 ```
 
@@ -109,14 +109,92 @@ Request body:
 }
 ```
 
-## Duplicate Stream
+The `address` field can also be an array of addresses.
+
+## Block Data & Webhook Delivery
+
+Fetch block data for a stream config:
+```
+POST /streams/evm/{chainId}/block/{blockNumber}
+```
+
+Request body (all fields optional):
+```json
+{
+  "tag": "backfill",
+  "topic0": ["Transfer(address,address,uint256)"],
+  "allAddresses": false,
+  "includeNativeTxs": true,
+  "includeContractLogs": true,
+  "includeInternalTxs": false,
+  "includeAllTxLogs": false,
+  "filterPossibleSpamAddresses": true,
+  "addresses": ["0x1234..."]
+}
+```
+
+Deliver block data to a specific stream webhook:
+```
+POST /streams/evm/{chainId}/block-to-webhook/{blockNumber}/{streamId}
+```
+
+## History & Delivery Logs
 
 ```
-POST /streams/evm/{id}/duplicate
+GET /history
 ```
 
-## Get Stream History (Block Data)
+Query parameters:
+- `limit` (required) - Max 100
+- `cursor` (optional)
+- `transactionHash` (optional)
+- `excludePayload` (optional) - boolean
+- `streamId` (optional)
+- `chainId` (optional) - array
+- `blockNumber` (optional) - array
+- `fromTimestamp` (optional) - number
+- `toTimestamp` (optional) - number
 
 ```
-GET /streams/evm/{chainId}/block/{blockNumber}
+GET /history/logs
+```
+
+Query parameters:
+- `limit` (required) - Max 100
+- `cursor` (optional)
+- `streamId` (optional)
+- `transactionHash` (optional)
+- `deliveryStatus` (optional) - array
+- `chainId` (optional) - array
+- `blockNumber` (optional) - array
+- `fromTimestamp` (optional) - number
+- `toTimestamp` (optional) - number
+
+Replay a delivery:
+```
+POST /history/replay/{streamId}/{id}
+```
+
+## Settings
+
+```
+GET /settings
+POST /settings
+```
+
+Request body:
+```json
+{
+  "region": "us-east-1",
+  "secretKey": "your-shared-secret"
+}
+```
+
+Supported regions: `us-east-1`, `us-west-2`, `eu-central-1`, `ap-southeast-1`.
+
+## Stats
+
+```
+GET /stats
+GET /stats/{streamId}
 ```
