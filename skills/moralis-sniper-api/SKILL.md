@@ -32,9 +32,24 @@ Use this skill when the user asks about:
 - "Sniper list", "Early buyer list", "Initial buyers"
 
 **⚠️ NOT for:**
-- General token prices → Use `web3-price-api` or `web3-token-api`
-- Token swaps/trades → Use `web3-token-api`
-- Real-time monitoring → Use `streams-api`
+- General token prices → Use `moralis-price-api` or `moralis-token-api`
+- Token swaps/trades → Use `moralis-token-api`
+- Real-time monitoring → Use `moralis-streams-api`
+
+## Common Pitfalls
+
+### Confusion: Sniper Detection vs Price Data
+- **Sniper detection:** Use this skill to identify early buyers and sniping activity
+- **Price data:** Use `moralis-price-api` or `moralis-token-api` for token prices
+
+### Confusion: Sniper Window
+- **Default window:** 3 blocks after pair creation (very early buyers)
+- **Wider window:** Increase `blocksAfterCreation` to catch later snipers (up to 1000 blocks)
+- **Not all early activity:** Some early buyers may be legitimate, not all are snipers
+
+### Confusion: Pair Address vs Token Address
+- **DEX pair address:** Required for sniper queries (e.g., Uniswap pair address)
+- **Token address:** Use `moralis-token-api` for token-specific data
 
 ## Setup
 
