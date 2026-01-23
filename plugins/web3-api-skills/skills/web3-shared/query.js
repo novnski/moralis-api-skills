@@ -18,83 +18,53 @@ const path = require("path");
  * NO external dependencies - uses only Node.js built-in modules
  */
 
-// Chain name to hex ID mapping (swagger-aligned)
+// Chain name to hex ID mapping (saves API tokens!)
 const CHAIN_HEX_MAP = {
   // EVM chains
   eth: "0x1",
+  ethereum: "0x1",
+  goerli: "0x5",
   sepolia: "0xaa36a7",
   polygon: "0x89",
+  mumbai: "0x13881",
   bsc: "0x38",
-  "bsc testnet": "0x61",
+  bsc_testnet: "0x61",
   avalanche: "0xa86a",
+  fuji: "0xa869",
   fantom: "0xfa",
-  cronos: "0x19",
   arbitrum: "0xa4b1",
-  chiliz: "0x15b38",
-  "chiliz testnet": "0x15b32",
-  gnosis: "0x64",
-  "gnosis testnet": "0x27d8",
-  base: "0x2105",
-  "base sepolia": "0x14a34",
+  arbitrum_testnet: "0x66eee",
   optimism: "0xa",
-  "polygon amoy": "0x13882",
-  linea: "0xe708",
+  optimism_testnet: "0x45",
+  base: "0x2105",
+  base_testnet: "0x14a34",
+  celo: "0xa4ec",
+  gnosis: "0x64",
   moonbeam: "0x504",
   moonriver: "0x505",
-  moonbase: "0x507",
-  "linea sepolia": "0xe705",
-  flow: "0x2eb",
-  "flow-testnet": "0x221",
-  ronin: "0x7e4",
-  "ronin-testnet": "0x7e5",
-  lisk: "0x46f",
-  "lisk-sepolia": "0x106a",
-  pulse: "0x171",
-  "sei-testnet": "0x530",
-  sei: "0x531",
-  monad: "0x8f",
-  // Solana (swagger chainListWithSolana)
-  solana: "solana",
+  cronos: "0x19",
+  aurora: "0x4e454152",
+  polygon_zkevm: "0x144",
+  amoy: "0x13882",
+  zkevm: "0x144",
+  linea: "0x770e",
+  linea_testnet: "0xe708",
+  scroll: "0x82750",
+  scroll_testnet: "0x8274f",
+  blast: "0x81457",
+  blast_testnet: "0x24c931",
+  manta: "0xa9b4",
+  manta_testnet: "0x5e02",
+  taiko: "0x50e8",
+  taiko_testnet: "0x50e3",
+  world: "0x1e12",
+  world_testnet: "0x1e14",
+  // Solana (not hex, but included for completeness)
+  sol: "sol",
+  solana: "sol",
+  mainnet: "mainnet",
+  devnet: "devnet",
 };
-
-const EVM_MAINNET_CHAIN_IDS = new Set([
-  "0x1",
-  "0x89",
-  "0x38",
-  "0xa4b1",
-  "0x2105",
-  "0xa",
-  "0xe708",
-  "0xa86a",
-  "0xfa",
-  "0x19",
-  "0x64",
-  "0x15b38",
-  "0x504",
-  "0x2eb",
-  "0x7e4",
-  "0x46f",
-  "0x171",
-  "0x531",
-  "0x8f",
-]);
-
-const EVM_TOKEN_PRICE_CHAIN_IDS = new Set([
-  "0x1",
-  "0x89",
-  "0x38",
-  "0xa4b1",
-  "0x2105",
-  "0xa",
-  "0xe708",
-  "0xa86a",
-  "0x64",
-  "0x504",
-  "0x7e4",
-  "0x171",
-  "0x531",
-  "0x8f",
-]);
 
 /**
  * Convert chain name to hex ID
@@ -103,28 +73,125 @@ const EVM_TOKEN_PRICE_CHAIN_IDS = new Set([
  */
 function chainToHex(chain) {
   if (!chain) return "0x1"; // Default to Ethereum
-  const normalized = String(chain).toLowerCase().trim();
-  if (normalized.startsWith("0x")) return normalized;
-  const compact = normalized.replace(/\s+/g, " ");
-  const mapped =
-    CHAIN_HEX_MAP[compact] ||
-    CHAIN_HEX_MAP[compact.replace(/\s+/g, "_")] ||
-    CHAIN_HEX_MAP[compact.replace(/\s+/g, "-")];
-  return mapped || chain;
+  const normalized = chain.toLowerCase();
+  return CHAIN_HEX_MAP[normalized] || chain;
 }
 
+// Set of all supported EVM chain IDs (hex format)
+const EVM_SUPPORTED_CHAIN_IDS = new Set([
+  "0x1", // Ethereum
+  "0x5", // Goerli
+  "0xaa36a7", // Sepolia
+  "0x89", // Polygon
+  "0x13881", // Mumbai
+  "0x38", // BSC
+  "0x61", // BSC Testnet
+  "0xa86a", // Avalanche
+  "0xa869", // Fuji
+  "0xfa", // Fantom
+  "0xa4b1", // Arbitrum
+  "0x66eee", // Arbitrum Testnet
+  "0xa", // Optimism
+  "0x45", // Optimism Testnet
+  "0x2105", // Base
+  "0x14a34", // Base Testnet
+  "0xa4ec", // Celo
+  "0x64", // Gnosis
+  "0x504", // Moonbeam
+  "0x505", // Moonriver
+  "0x19", // Cronos
+  "0x4e454152", // Aurora
+  "0x144", // Polygon zkEVM
+  "0x13882", // Amoy
+  "0x770e", // Linea
+  "0xe708", // Linea Testnet
+  "0x82750", // Scroll
+  "0x8274f", // Scroll Testnet
+  "0x81457", // Blast
+  "0x24c931", // Blast Testnet
+  "0xa9b4", // Manta
+  "0x5e02", // Manta Testnet
+  "0x50e8", // Taiko
+  "0x50e3", // Taiko Testnet
+  "0x1e12", // World
+  "0x1e14", // World Testnet
+]);
+
+// Mainnet-only chains (for endpoints that don't support testnets)
+const EVM_MAINNET_CHAIN_IDS = new Set([
+  "0x1", // Ethereum
+  "0x89", // Polygon
+  "0x38", // BSC
+  "0xa86a", // Avalanche
+  "0xfa", // Fantom
+  "0xa4b1", // Arbitrum
+  "0xa", // Optimism
+  "0x2105", // Base
+  "0xa4ec", // Celo
+  "0x64", // Gnosis
+  "0x504", // Moonbeam
+  "0x505", // Moonriver
+  "0x19", // Cronos
+  "0x4e454152", // Aurora
+  "0x144", // Polygon zkEVM
+  "0x770e", // Linea
+  "0x82750", // Scroll
+  "0x81457", // Blast
+  "0xa9b4", // Manta
+  "0x50e8", // Taiko
+  "0x1e12", // World
+]);
+
+// Chains with token price support
+const EVM_TOKEN_PRICE_CHAIN_IDS = new Set([
+  "0x1", // Ethereum
+  "0x89", // Polygon
+  "0x38", // BSC
+  "0xa86a", // Avalanche
+  "0xa4b1", // Arbitrum
+  "0xa", // Optimism
+  "0x2105", // Base
+  "0x64", // Gnosis
+  "0x504", // Moonbeam
+  "0x770e", // Linea
+  "0x82750", // Scroll
+  "0x81457", // Blast
+  "0xa9b4", // Manta
+  "0x50e8", // Taiko
+  "0x1e12", // World
+]);
+
+/**
+ * Assert that a chain ID is supported
+ * @param {string} chainHex - Hex chain ID
+ * @param {string} endpoint - API endpoint
+ * @param {Set} allowedChains - Set of allowed chain IDs
+ * @param {string} reason - Custom error message
+ * @throws {Error} If chain is not supported
+ */
 function assertEvmChainSupported(chainHex, endpoint, allowedChains, reason) {
   if (allowedChains.has(chainHex)) return;
   const message =
     reason ||
-    `Unsupported chain for ${endpoint}. Supported chain IDs: ${[...allowedChains].join(", ")}`;
+    `Unsupported chain "${chainHex}" for endpoint ${endpoint}. ` +
+      `Supported chain IDs: ${[...allowedChains].join(", ")}`;
   throw new Error(message);
 }
 
+/**
+ * Check if endpoint is a wallet history endpoint (mainnet only)
+ * @param {string} endpoint - API endpoint path
+ * @returns {boolean}
+ */
 function isWalletHistoryEndpoint(endpoint) {
   return /^\/wallets\/(:address|[^/]+)\/history\b/.test(endpoint);
 }
 
+/**
+ * Check if endpoint is a wallet tokens endpoint (token price support required)
+ * @param {string} endpoint - API endpoint path
+ * @returns {boolean}
+ */
 function isWalletTokensEndpoint(endpoint) {
   return /^\/wallets\/(:address|[^/]+)\/tokens\b/.test(endpoint);
 }
@@ -164,11 +231,11 @@ function getAPIKey(skillDir = __dirname) {
   if (!envPath) {
     throw new Error(
       "API key not found. Please set it by running:\n" +
-      "  /web3-api-key\n\n" +
-      "Or create .env file with:\n" +
-      "  MORALIS_API_KEY=your_key_here\n" +
-      "Searched from: " +
-      skillDir,
+        "  /web3-api-key\n\n" +
+        "Or create .env file with:\n" +
+        "  MORALIS_API_KEY=your_key_here\n" +
+        "Searched from: " +
+        skillDir,
     );
   }
 
@@ -306,14 +373,37 @@ async function dateToBlock(date, chain = "eth", skillDir = __dirname) {
   // Call blockchain API
   const url = `https://deep-index.moralis.io/api/v2.2/dateToBlock?chain=${chainHex}&date=${encodeURIComponent(dateStr)}`;
 
-  const response = await httpsRequest(url, {
-    "x-api-key": apiKey,
-    Accept: "application/json",
+  return new Promise((resolve, reject) => {
+    https
+      .get(
+        url,
+        { headers: { "x-api-key": apiKey, Accept: "application/json" } },
+        (res) => {
+          let data = "";
+          res.on("data", (chunk) => {
+            data += chunk;
+          });
+          res.on("end", () => {
+            try {
+              const parsed = JSON.parse(data);
+              if (res.statusCode >= 400) {
+                reject(
+                  new Error(
+                    `API Error ${res.statusCode}: ${JSON.stringify(parsed)}`,
+                  ),
+                );
+              } else {
+                resolve(parsed.block);
+              }
+            } catch (e) {
+              reject(e);
+            }
+          });
+          res.on("error", reject);
+        },
+      )
+      .on("error", reject);
   });
-  if (!response || typeof response !== "object" || response.block == null) {
-    throw new Error("Invalid dateToBlock response from API.");
-  }
-  return response.block;
 }
 
 /**
@@ -336,9 +426,36 @@ async function searchToken(queryParam, chains, skillDir = __dirname) {
     }
   }
 
-  return httpsRequest(url, {
-    "x-api-key": apiKey,
-    Accept: "application/json",
+  return new Promise((resolve, reject) => {
+    https
+      .get(
+        url,
+        { headers: { "x-api-key": apiKey, Accept: "application/json" } },
+        (res) => {
+          let data = "";
+          res.on("data", (chunk) => {
+            data += chunk;
+          });
+          res.on("end", () => {
+            try {
+              const parsed = JSON.parse(data);
+              if (res.statusCode >= 400) {
+                reject(
+                  new Error(
+                    `API Error ${res.statusCode}: ${JSON.stringify(parsed)}`,
+                  ),
+                );
+              } else {
+                resolve(parsed);
+              }
+            } catch (e) {
+              reject(e);
+            }
+          });
+          res.on("error", reject);
+        },
+      )
+      .on("error", reject);
   });
 }
 
@@ -402,6 +519,10 @@ async function query(endpoint, options = {}) {
     const baseURL = "https://deep-index.moralis.io/api/v2.2";
     const chainHex = blockchain.chain;
 
+    // Validate chain support (fail early with clear error message)
+    assertEvmChainSupported(chainHex, endpoint, EVM_SUPPORTED_CHAIN_IDS);
+
+    // Additional validation for specific endpoints
     if (isWalletHistoryEndpoint(endpoint)) {
       assertEvmChainSupported(
         chainHex,
