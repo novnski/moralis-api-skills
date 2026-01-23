@@ -4,6 +4,8 @@
 IMPLEMENTATION_PLAN.md
 todo/
 /simulation
+# External documentation (reference only)
+/documentation/moralis-docs/*
 # Always ignore API keys (in skill directories)
 .env
 **/.env
