@@ -1,0 +1,138 @@
+# Files That Need Updating for Plugin Relocation
+
+## CRITICAL - Plugin Manifests (3 files)
+
+1. .claude-plugin/marketplace.json
+   - Update plugin source paths
+   - May need restructuring for root-level skills
+
+2. plugins/web3-api-skills/.claude-plugin/plugin.json
+   - Update skills path from ./skills/ to ../../skills/
+   - Update commands path if moving to skills/
+
+3. plugins/streams-api-skills/.claude-plugin/plugin.json
+   - Update skills path from ./skills/ to ../../skills/
+
+## HIGH PRIORITY - Command Files (1 file)
+
+4. plugins/web3-api-skills/commands/web3-api-key.md
+   - Lines 57, 67: Update marketplace path from web3-skills to moralis-skills
+   - Lines 106, 113, 123, 152, 157: Update cache paths
+   - Lines 188-189: Update troubleshooting paths
+
+## HIGH PRIORITY - Test Scripts (2 files)
+
+5. scripts/test-all-skills.sh
+   - Line 9: Update .env path from plugins/.../web3-wallet-api to skills/moralis-wallet-api
+   - Line 18: Update skill array from web3-* to moralis-* (13 skills)
+   - Lines 21-22: Update skill paths to skills/
+
+6. scripts/test-installation.sh
+   - Line 35: Update find path from plugins/... to skills/
+   - Line 35: Update pattern from web3-* to moralis-*
+   - Line 37: Update count from 9 to 13
+   - Line 46: Update shared path to skills/web3-shared/
+
+## MEDIUM PRIORITY - Documentation (8 files)
+
+7. CLAUDE.md
+   - Line 49, 64: Plugin marketplace add commands (may not change)
+   - Line 54, 59: Plugin install commands (may not change)
+   - Line 291, 295, 303: References to plugin structure
+   - Throughout: References to web3-* skill names
+
+8. README.md
+   - Lines 93-94: Cache path references
+   - Throughout: Plugin installation examples
+
+9. RELEASE_NOTES.md
+   - Lines 14, 19, 24, 59-61: Plugin commands
+   - Throughout: Skill naming references
+
+10. plugins/streams-api-skills/README.md
+    - Line 19, 23, 34: Plugin commands and cache paths
+
+11. documentation/MIGRATION_GUIDE.md
+    - Lines 74-75, 211-212: Plugin install commands
+    - Throughout: Skill naming and path references
+
+12. documentation/github-pages/index.md
+    - Lines 29, 34, 38, 43: Plugin commands
+
+13. documentation/github-pages/installation.md
+    - Lines 25, 30, 34, 39: Plugin commands
+    - Lines 50-52: Cache path references
+    - Lines 106, 111: API key examples
+
+14. plugins/streams-api-skills/agents/moralis-platform-developer.md
+    - Line 76: API key command reference
+
+## LOW PRIORITY - SKILL.md Files (13 files)
+
+All SKILL.md files need frontmatter updates:
+
+15. skills/moralis-wallet-api/SKILL.md
+    - Line 2: Update name from web3-wallet-api to moralis-wallet-api
+    - Line 82: Update installation path references
+
+16. skills/moralis-token-api/SKILL.md
+    - Update name and references
+
+17. skills/moralis-nft-api/SKILL.md
+    - Update name and references
+
+18. skills/moralis-defi-api/SKILL.md
+    - Update name and references
+
+19. skills/moralis-entity-api/SKILL.md
+    - Update name and references
+
+20. skills/moralis-price-api/SKILL.md
+    - Update name and references
+
+21. skills/moralis-blockchain-api/SKILL.md
+    - Update name and references
+
+22. skills/moralis-utils/SKILL.md
+    - Update name and references
+
+23. skills/moralis-premium/SKILL.md
+    - Update name and references
+
+24. skills/moralis-analytics-api/SKILL.md
+    - Verify name and references
+
+25. skills/moralis-score-api/SKILL.md
+    - Verify name and references
+
+26. skills/moralis-sniper-api/SKILL.md
+    - Verify name and references
+
+27. skills/moralis-streams-api/SKILL.md
+    - Update name from streams-api to moralis-streams-api
+
+## REFERENCE ONLY - Simulation Directory (DO NOT MODIFY)
+
+simulation/claude-install/.claude/plugins/cache/moralis-skills/
+  - Contains old structure for reference
+  - Do NOT modify these files
+
+---
+
+# Update Priority Order
+
+1. ✅ CRITICAL: Plugin manifests (blocks installation)
+2. ✅ HIGH: Command files (breaks API key setup)
+3. ✅ HIGH: Test scripts (breaks validation)
+4. ✅ MEDIUM: Documentation (misleading to users)
+5. ✅ LOW: SKILL.md frontmatter (cosmetic but inconsistent)
+
+# Estimated Files to Update: 27 files
+
+- Plugin manifests: 3
+- Commands: 1
+- Scripts: 2
+- Documentation: 8
+- SKILL.md files: 13
+
+Total: 27 files requiring updates for complete relocation

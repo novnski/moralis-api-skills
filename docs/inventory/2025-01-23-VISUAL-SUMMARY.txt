@@ -1,0 +1,114 @@
+# Plugin Relocation - Visual Summary
+
+## BEFORE (Old Structure)
+
+```
+moralis-api-skills/
+├── .claude-plugin/
+│   └── marketplace.json
+├── plugins/
+│   ├── web3-api-skills/
+│   │   ├── .claude-plugin/plugin.json
+│   │   ├── agents/web3-developer.md
+│   │   ├── commands/web3-api-key.md
+│   │   └── skills/
+│   │       ├── web3-wallet-api/SKILL.md
+│   │       ├── web3-token-api/SKILL.md
+│   │       ├── web3-nft-api/SKILL.md
+│   │       ├── web3-defi-api/SKILL.md
+│   │       ├── web3-entity-api/SKILL.md
+│   │       ├── web3-price-api/SKILL.md
+│   │       ├── web3-blockchain-api/SKILL.md
+│   │       ├── web3-utils/SKILL.md
+│   │       ├── web3-premium/SKILL.md
+│   │       └── web3-shared/query.js
+│   └── streams-api-skills/
+│       ├── .claude-plugin/plugin.json
+│       ├── agents/moralis-platform-developer.md
+│       └── skills/
+│           └── streams-api/SKILL.md
+└── (no skills/ at root)
+```
+
+Skills: 10 total (9 web3-* + 1 streams-api)
+
+## AFTER (New Structure - NOT COMMITTED)
+
+```
+moralis-api-skills/
+├── .claude-plugin/
+│   └── marketplace.json  (⚠️ needs update)
+├── plugins/
+│   ├── web3-api-skills/
+│   │   ├── .claude-plugin/plugin.json  (⚠️ needs update)
+│   │   ├── agents/web3-developer.md
+│   │   ├── commands/web3-api-key.md  (⚠️ needs update)
+│   │   └── skills/  (⚠️ EMPTY - all moved out)
+│   └── streams-api-skills/
+│       ├── .claude-plugin/plugin.json  (⚠️ needs update)
+│       ├── agents/moralis-platform-developer.md
+│       └── skills/  (⚠️ EMPTY - all moved out)
+└── skills/  (⭐ NEW ROOT-LEVEL LOCATION)
+    ├── moralis-wallet-api/SKILL.md  (renamed)
+    ├── moralis-token-api/SKILL.md  (renamed)
+    ├── moralis-nft-api/SKILL.md  (renamed)
+    ├── moralis-defi-api/SKILL.md  (renamed)
+    ├── moralis-entity-api/SKILL.md  (renamed)
+    ├── moralis-price-api/SKILL.md  (renamed)
+    ├── moralis-blockchain-api/SKILL.md  (renamed)
+    ├── moralis-utils/SKILL.md  (renamed)
+    ├── moralis-premium/SKILL.md  (renamed)
+    ├── moralis-analytics-api/SKILL.md  (new v1.1.0)
+    ├── moralis-score-api/SKILL.md  (new v1.1.0)
+    ├── moralis-sniper-api/SKILL.md  (new v1.1.0)
+    ├── moralis-streams-api/SKILL.md  (renamed)
+    ├── moralis-api-key/  (empty - TBD)
+    └── web3-shared/query.js  (unchanged)
+```
+
+Skills: 14 total (13 moralis-* + 1 web3-shared)
+
+## Key Changes
+
+1. ✅ Skills moved from plugins/*/skills/* to root skills/
+2. ✅ Renamed: web3-* → moralis-* (9 skills)
+3. ✅ Moved: streams-api → moralis-streams-api
+4. ✅ New: moralis-analytics-api, moralis-score-api, moralis-sniper-api
+5. ✅ Unchanged: web3-shared
+6. ⚠️ Inconsistent: SKILL.md frontmatter still says "name: web3-*"
+7. ⚠️ Broken: Plugin manifests still point to empty ./skills/ directories
+
+## Naming Changes
+
+| Category | Old Pattern | New Pattern | Example |
+|----------|-------------|-------------|---------|
+| Core skills | web3-{domain}-api | moralis-{domain}-api | web3-wallet-api → moralis-wallet-api |
+| Streams | streams-api | moralis-streams-api | streams-api → moralis-streams-api |
+| Utility | web3-shared | web3-shared | (unchanged) |
+| Command | web3-api-key.md | moralis-api-key/ | command file → directory (TBD) |
+
+## Git Status
+
+Deleted: 44 files (from plugins/*/skills/*/)
+Untracked: skills/ directory (not committed)
+Branch: main (clean except for move)
+
+## Next Steps
+
+Phase 1: Decide Structure
+  [ ] Keep plugins/ with subdirs?
+  [ ] Flatten to root skills/?
+  [ ] Hybrid approach?
+
+Phase 2: Update References
+  [ ] Plugin manifests (3 files)
+  [ ] Command files (1 file)
+  [ ] Test scripts (2 files)
+  [ ] Documentation (8 files)
+  [ ] SKILL.md frontmatter (13 files)
+
+Phase 3: Commit
+  [ ] Stage new skills/
+  [ ] Remove old plugins/*/skills/
+  [ ] Verify all tests pass
+  [ ] Commit changes

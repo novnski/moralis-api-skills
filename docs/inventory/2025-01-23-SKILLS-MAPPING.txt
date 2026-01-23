@@ -1,0 +1,61 @@
+# Skills Mapping: Old → New
+
+## Web3 API Skills (9 core skills)
+
+OLD (plugins/web3-api-skills/skills/)           → NEW (skills/)
+web3-wallet-api/                                → moralis-wallet-api/
+web3-token-api/                                 → moralis-token-api/
+web3-nft-api/                                   → moralis-nft-api/
+web3-defi-api/                                  → moralis-defi-api/
+web3-entity-api/                                → moralis-entity-api/
+web3-price-api/                                 → moralis-price-api/
+web3-blockchain-api/                            → moralis-blockchain-api/
+web3-utils/                                     → moralis-utils/
+web3-premium/                                   → moralis-premium/
+
+## v1.1.0 New Skills (3 skills)
+
+ALREADY IN NEW LOCATION (skills/)
+moralis-analytics-api/  (Token analytics)
+moralis-score-api/      (Token security scores)
+moralis-sniper-api/     (DEX snipers detection)
+
+## Streams API Skills (1 skill)
+
+OLD (plugins/streams-api-skills/skills/)       → NEW (skills/)
+streams-api/                                    → moralis-streams-api/
+
+## Shared Utilities
+
+OLD (plugins/web3-api-skills/skills/)           → NEW (skills/)
+web3-shared/                                    → web3-shared/ (unchanged)
+
+## Commands
+
+OLD (plugins/web3-api-skills/commands/)         → NEW (skills/)
+web3-api-key.md                                 → moralis-api-key/ (empty dir)
+
+---
+
+# Summary Statistics
+
+OLD STRUCTURE:
+- web3-api-skills: 9 skills + 1 shared utility
+- streams-api-skills: 1 skill
+- TOTAL: 10 skills + 1 utility
+
+NEW STRUCTURE:
+- moralis-* skills: 12 skills (9 renamed + 3 new)
+- moralis-streams-api: 1 skill (renamed)
+- web3-shared: 1 utility (unchanged)
+- moralis-api-key: 1 command (empty, TBD)
+- TOTAL: 13 skills + 1 utility + 1 command (TBD)
+
+# Naming Pattern Change
+
+Pattern: web3-{domain}-api → moralis-{domain}-api
+
+Exceptions:
+- web3-shared → web3-shared (unchanged)
+- streams-api → moralis-streams-api (renamed)
+- web3-api-key command → moralis-api-key directory (new)
