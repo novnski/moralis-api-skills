@@ -125,10 +125,10 @@ Or manage Streams:
 
 ## Documentation
 
-- [Installation Guide](installation)
-- [Usage Examples](examples)
-- [API Reference](api-reference)
-- [Contributing](contributing)
+- [Installation Guide]({{ "/installation" | relative_url }})
+- [Usage Examples]({{ "/examples" | relative_url }})
+- [API Reference]({{ "/api-reference" | relative_url }})
+- [Contributing]({{ "/contributing" | relative_url }})
 
 ## Requirements
 

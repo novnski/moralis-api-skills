@@ -206,5 +206,5 @@ rm -rf ~/.claude/skills/moralis-skills
 
 ## Next Steps
 
-- See [Usage Examples](/moralis-skills/examples) for common queries
-- Check [API Reference](/moralis-skills/api-reference) for endpoint details
+- See [Usage Examples]({{ "/examples" | relative_url }}) for common queries
+- Check [API Reference]({{ "/api-reference" | relative_url }}) for endpoint details

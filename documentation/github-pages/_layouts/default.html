@@ -3,25 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title | default: 'Web3 Skills' }}</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
-    h1, h2, h3 { color: #333; }
-    code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
-    pre { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
-    a { color: #0066cc; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .nav { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
-    .nav a { margin-right: 15px; }
-  </style>
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  
+  <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+  <link rel="icon" href="https://moralis.io/wp-content/uploads/2021/06/Moralis-Icon-Dark.svg" type="image/svg+xml">
 </head>
 <body>
-  <div class="nav">
-    <a href="/moralis-skills/">Home</a>
-    <a href="/moralis-skills/installation">Installation</a>
-    <a href="/moralis-skills/examples">Examples</a>
-    <a href="https://github.com/noviulian/moralis-skills">GitHub</a>
+  <div class="app-container">
+    <header class="site-header">
+      <a href="{{ "/" | relative_url }}" class="site-title">{{ site.title }}</a>
+      <nav class="header-nav">
+        <a href="https://github.com/noviulian/moralis-skills" target="_blank">GitHub</a>
+        <a href="https://moralis.io" target="_blank">Moralis.io</a>
+      </nav>
+    </header>
+
+    <div class="main-wrapper">
+      <aside class="sidebar">
+        <nav class="sidebar-nav">
+          <ul>
+            <li><a href="{{ "/" | relative_url }}">Introduction</a></li>
+            <li><a href="{{ "/installation" | relative_url }}">Installation</a></li>
+            <li><a href="{{ "/examples" | relative_url }}">Usage Examples</a></li>
+            <li><a href="{{ "/api-reference" | relative_url }}">API Reference</a></li>
+            <li><a href="{{ "/contributing" | relative_url }}">Contributing</a></li>
+          </ul>
+          
+          <div style="margin-top: 2rem; font-size: 0.85rem; font-weight: 600; color: #6b7280; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Skills Source</div>
+          <ul>
+            <li><a href="https://github.com/noviulian/moralis-skills/blob/main/plugins/web3-api-skills/skills/web3-wallet-api/SKILL.md" target="_blank">Wallet API ↗</a></li>
+            <li><a href="https://github.com/noviulian/moralis-skills/blob/main/plugins/web3-api-skills/skills/web3-token-api/SKILL.md" target="_blank">Token API ↗</a></li>
+            <li><a href="https://github.com/noviulian/moralis-skills/blob/main/plugins/web3-api-skills/skills/web3-nft-api/SKILL.md" target="_blank">NFT API ↗</a></li>
+            <li><a href="https://github.com/noviulian/moralis-skills/blob/main/plugins/streams-api-skills/skills/streams-api/SKILL.md" target="_blank">Streams API ↗</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="content">
+        {{ content }}
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <p>&copy; {{ site.time | date: '%Y' }} Moralis API Skills for Claude Code. Open Source under MIT License.</p>
+    </footer>
   </div>
-  {{ content }}
+
+  <script src="{{ "/assets/js/script.js" | relative_url }}"></script>
 </body>
 </html>
