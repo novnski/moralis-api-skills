@@ -31,8 +31,8 @@
 - **Use this endpoint when:** User asks "SOL balance", "native balance", "how much SOL", "Solana balance"
 - **Networks:** mainnet, devnet
 - **Params:**
-  - `network` (required) - The network to query
-  - `address` (required) - The address to query
+  - `network` (required, string) - The network to query
+  - `address` (required, string) - The address to query
 
 ---
 
@@ -44,9 +44,9 @@
 - **Use this endpoint when:** User asks "SPL tokens", "token balances", "what tokens", "Solana tokens"
 - **Networks:** mainnet, devnet
 - **Params:**
-  - `network` (required) - The network to query
-  - `address` (required) - The address to query
-  - `excludeSpam` (optional) - Should exclude spam tokens
+  - `network` (required, string) - The network to query
+  - `address` (required, string) - The address to query
+  - `excludeSpam` (optional, boolean) - Should exclude spam tokens
 
 ---
 
@@ -58,11 +58,11 @@
 - **Use this endpoint when:** User asks "portfolio", "full portfolio", "complete holdings", "wallet value"
 - **Networks:** mainnet, devnet
 - **Params:**
-  - `network` (required) - The network to query
-  - `address` (required) - The address to query
-  - `nftMetadata` (optional) - Should return the full NFT metadata
-  - `mediaItems` (optional) - Should return media items
-  - `excludeSpam` (optional) - Should exclude spam NFTs
+  - `network` (required, string) - The network to query
+  - `address` (required, string) - The address to query
+  - `nftMetadata` (optional, boolean) - Should return the full NFT metadata
+  - `mediaItems` (optional, boolean) - Should return media items
+  - `excludeSpam` (optional, boolean) - Should exclude spam NFTs
 
 ---
 
@@ -74,12 +74,12 @@
 - **Use this endpoint when:** User asks "wallet NFTs", "what NFTs does this wallet own", "Solana NFT portfolio"
 - **Networks:** mainnet, devnet
 - **Params:**
-  - `network` (required) - The network to query
-  - `address` (required) - The address to query
-  - `nftMetadata` (optional) - Should return the full NFT metadata
-  - `mediaItems` (optional) - Should return media items
-  - `excludeSpam` (optional) - Should exclude spam NFTs
-  - `includeFungibleAssets` (optional) - Should include fungible assets (tokenStandard:1)
+  - `network` (required, string) - The network to query
+  - `address` (required, string) - The address to query
+  - `nftMetadata` (optional, boolean) - Should return the full NFT metadata
+  - `mediaItems` (optional, boolean) - Should return media items
+  - `excludeSpam` (optional, boolean) - Should exclude spam NFTs
+  - `includeFungibleAssets` (optional, boolean) - Should include fungible assets (tokenStandard:1)
 
 ---
 
@@ -91,15 +91,15 @@
 - **Use this endpoint when:** User asks "wallet swaps", "swap history", "trading history", "DEX trades"
 - **Networks:** mainnet, devnet
 - **Params:**
-  - `network` (required) - The network to query
-  - `address` (required) - The address to query
-  - `limit` (optional) - The limit per page
-  - `cursor` (optional) - The cursor to the next page
-  - `order` (optional) - The order of items
-  - `fromDate` (optional) - The starting date (format in seconds or datestring)
-  - `toDate` (optional) - The ending date (format in seconds or datestring)
-  - `transactionTypes` (optional) - Transaction types to fetch (possible values: 'buy', 'sell')
-  - `tokenAddress` (optional) - Token address to get transactions for
+  - `network` (required, string) - The network to query
+  - `address` (required, string) - The address to query
+  - `limit` (optional, integer) - The limit per page
+  - `cursor` (optional, string) - The cursor to the next page
+  - `order` (optional, string) - The order of items
+  - `fromDate` (optional, string) - The starting date (format in seconds or datestring)
+  - `toDate` (optional, string) - The ending date (format in seconds or datestring)
+  - `transactionTypes` (optional, string) - Transaction types to fetch (possible values: 'buy', 'sell')
+  - `tokenAddress` (optional, string) - Token address to get transactions for
 
 ---
 

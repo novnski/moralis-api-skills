@@ -33,17 +33,17 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/wallets/:address/history
 - **Use this endpoint when:** User asks for "complete history", "all activity", "wallet activity summary", "everything this wallet has done", "token transfers", "ERC20 transfers", "tokens sent/received", "token transaction history", "nft transfer history"
 - **Params:**
-  - `address` (required) - Wallet address
-  - `chain` (optional) - Chain to query
-  - `limit` (optional) - Page size
-  - `cursor` (optional) - Pagination cursor
-  - `from_block` (optional) - Start block
-  - `to_block` (optional) - End block
-  - `from_date` (optional) - Start date
-  - `to_date` (optional) - End date
-  - `include_internal_transactions` (optional) - Include internal transactions
-  - `nft_metadata` (optional) - Include NFT metadata
-  - `order` (optional) - Sort order
+  - `address` (required, string) - Wallet address
+  - `chain` (optional, string) - Chain to query
+  - `limit` (optional, integer) - Page size
+  - `cursor` (optional, string) - Pagination cursor
+  - `from_block` (optional, integer) - Start block
+  - `to_block` (optional, integer) - End block
+  - `from_date` (optional, string) - Start date
+  - `to_date` (optional, string) - End date
+  - `include_internal_transactions` (optional, boolean) - Include internal transactions
+  - `nft_metadata` (optional, boolean) - Include NFT metadata
+  - `order` (optional, string) - Sort order
 
 ---
 
@@ -55,16 +55,16 @@
 - **Use this endpoint when:** User asks "transactions", "tx history", "native transfers", "ETH/BNB/MATIC transfers", "sent transactions", "received transactions"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The address of the wallet
-  - `chain` (optional) - The chain to query
-  - `from_block` (optional) - The minimum block number from which to get the transactions
-  - `to_block` (optional) - The maximum block number from which to get the transactions
-  - `from_date` (optional) - The start date from which to get the transactions (format in seconds or datestring)
-  - `to_date` (optional) - The end date to get transactions up to (format in seconds or datestring)
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
-  - `order` (optional) - The order of the result (ASC or DESC)
-  - `limit` (optional) - The desired page size of the result
-  - `include` (optional) - If the result should contain the internal transactions
+  - `address` (required, string) - The address of the wallet
+  - `chain` (optional, string) - The chain to query
+  - `from_block` (optional, integer) - The minimum block number from which to get the transactions
+  - `to_block` (optional, integer) - The maximum block number from which to get the transactions
+  - `from_date` (optional, string) - The start date from which to get the transactions (format in seconds or datestring)
+  - `to_date` (optional, string) - The end date to get transactions up to (format in seconds or datestring)
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
+  - `order` (optional, string) - The order of the result (ASC or DESC)
+  - `limit` (optional, integer) - The desired page size of the result
+  - `include` (optional, string) - If the result should contain the internal transactions
 
 ---
 
@@ -76,16 +76,16 @@
 - **Use this endpoint when:** User asks "decoded transactions", "what functions were called", "transaction details", "verbose transactions", "parsed transactions"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The address of the wallet
-  - `chain` (optional) - The chain to query
-  - `from_block` (optional) - The minimum block number from which to get the transactions
-  - `to_block` (optional) - The maximum block number from which to get the transactions
-  - `from_date` (optional) - The start date from which to get the transactions (format in seconds or datestring)
-  - `to_date` (optional) - The end date to get transactions up to (format in seconds or datestring)
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
-  - `order` (optional) - The order of the result (ASC or DESC)
-  - `limit` (optional) - The desired page size of the result
-  - `include` (optional) - If the result should contain the internal transactions
+  - `address` (required, string) - The address of the wallet
+  - `chain` (optional, string) - The chain to query
+  - `from_block` (optional, integer) - The minimum block number from which to get the transactions
+  - `to_block` (optional, integer) - The maximum block number from which to get the transactions
+  - `from_date` (optional, string) - The start date from which to get the transactions (format in seconds or datestring)
+  - `to_date` (optional, string) - The end date to get transactions up to (format in seconds or datestring)
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
+  - `order` (optional, string) - The order of the result (ASC or DESC)
+  - `limit` (optional, integer) - The desired page size of the result
+  - `include` (optional, string) - If the result should contain the internal transactions
 
 ---
 
@@ -97,16 +97,16 @@
 - **Use this endpoint when:** User asks specifically for "ERC20 transfers", "token transfers only", "ERC20 transaction history"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The address of the wallet
-  - `chain` (optional) - The chain to query
-  - `from_block` (optional) - The minimum block number from which to get the transactions
-  - `to_block` (optional) - The maximum block number from which to get the transactions
-  - `from_date` (optional) - The start date from which to get the transactions (format in seconds or datestring)
-  - `to_date` (optional) - The end date to get transactions up to (format in seconds or datestring)
-  - `contract_addresses` (optional) - List of contract addresses of transfers
-  - `limit` (optional) - The desired page size of the result
-  - `order` (optional) - The order of the result (ASC or DESC)
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
+  - `address` (required, string) - The address of the wallet
+  - `chain` (optional, string) - The chain to query
+  - `from_block` (optional, integer) - The minimum block number from which to get the transactions
+  - `to_block` (optional, integer) - The maximum block number from which to get the transactions
+  - `from_date` (optional, string) - The start date from which to get the transactions (format in seconds or datestring)
+  - `to_date` (optional, string) - The end date to get transactions up to (format in seconds or datestring)
+  - `contract_addresses` (optional, array) - List of contract addresses of transfers
+  - `limit` (optional, integer) - The desired page size of the result
+  - `order` (optional, string) - The order of the result (ASC or DESC)
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
 
 ---
 
@@ -118,18 +118,18 @@
 - **Use this endpoint when:** User asks specifically for "NFT transfers", "NFT transaction history"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The wallet address of the sender or recipient of the transfers
-  - `chain` (optional) - The chain to query
-  - `contract_addresses` (optional) - List of contract addresses of transfers
-  - `format` (optional) - The format of the token ID
-  - `from_block` (optional) - The minimum block number from which to get the transfers
-  - `to_block` (optional) - The block number to get the transfers from
-  - `from_date` (optional) - The start date from which to get the transfers (format in seconds or datestring)
-  - `to_date` (optional) - The end date to get transfers up to (format in seconds or datestring)
-  - `include_prices` (optional) - Should NFT last sale prices be included in the result?
-  - `limit` (optional) - The desired page size of the result
-  - `order` (optional) - The order of the result (ASC or DESC)
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
+  - `address` (required, string) - The wallet address of the sender or recipient of the transfers
+  - `chain` (optional, string) - The chain to query
+  - `contract_addresses` (optional, array) - List of contract addresses of transfers
+  - `format` (optional, string) - The format of the token ID
+  - `from_block` (optional, integer) - The minimum block number from which to get the transfers
+  - `to_block` (optional, string) - The block number to get the transfers from
+  - `from_date` (optional, string) - The start date from which to get the transfers (format in seconds or datestring)
+  - `to_date` (optional, string) - The end date to get transfers up to (format in seconds or datestring)
+  - `include_prices` (optional, boolean) - Should NFT last sale prices be included in the result?
+  - `limit` (optional, integer) - The desired page size of the result
+  - `order` (optional, string) - The order of the result (ASC or DESC)
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
 
 ---
 
@@ -141,15 +141,15 @@
 - **Use this endpoint when:** User asks "NFT trades", "NFT sales", "NFT purchases", "marketplace transactions"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The owner wallet address
-  - `chain` (optional) - The chain to query
-  - `from_block` (optional) - The minimum block number from which to get the transfers
-  - `to_block` (optional) - The block number to get the trades from
-  - `from_date` (optional) - The start date from which to get the transfers (format in seconds or datestring)
-  - `to_date` (optional) - The end date from which to get the transfers (format in seconds or datestring)
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
-  - `limit` (optional) - The desired page size of the result
-  - `nft_metadata` (optional) - Include the NFT Metadata of the NFT Token
+  - `address` (required, string) - The owner wallet address
+  - `chain` (optional, string) - The chain to query
+  - `from_block` (optional, integer) - The minimum block number from which to get the transfers
+  - `to_block` (optional, integer) - The block number to get the trades from
+  - `from_date` (optional, string) - The start date from which to get the transfers (format in seconds or datestring)
+  - `to_date` (optional, string) - The end date from which to get the transfers (format in seconds or datestring)
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
+  - `limit` (optional, integer) - The desired page size of the result
+  - `nft_metadata` (optional, boolean) - Include the NFT Metadata of the NFT Token
 
 ## Get Native Balance
 
@@ -160,9 +160,9 @@
 - **⚠️ IMPORTANT:** This endpoint is `/:address/balance`, NOT `/wallets/:address/balance`
 - **Auto-chain:** Yes (from ?chain parameter)
 - **Params:**
-  - `address` (required) - The address from which the native balance will be checked
-  - `chain` (optional) - The chain to query
-  - `to_block` (optional) - The block number up to which the balances will be checked
+  - `address` (required, string) - The address from which the native balance will be checked
+  - `chain` (optional, string) - The chain to query
+  - `to_block` (optional, integer) - The block number up to which the balances will be checked
 
 ---
 
@@ -174,16 +174,16 @@
 - **Use this endpoint when:** User asks "ERC20 balances", "token balances without prices", "what ERC20 tokens"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The address of the wallet
-  - `chain` (optional) - The chain to query
-  - `from_block` (optional) - The minimum block number from which to get the transactions
-  - `to_block` (optional) - The maximum block number from which to get the transactions
-  - `from_date` (optional) - The start date from which to get the transactions (format in seconds or datestring)
-  - `to_date` (optional) - The end date to get transactions up to (format in seconds or datestring)
-  - `contract_addresses` (optional) - List of contract addresses of transfers
-  - `limit` (optional) - The desired page size of the result
-  - `order` (optional) - The order of the result (ASC or DESC)
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
+  - `address` (required, string) - The address of the wallet
+  - `chain` (optional, string) - The chain to query
+  - `from_block` (optional, integer) - The minimum block number from which to get the transactions
+  - `to_block` (optional, integer) - The maximum block number from which to get the transactions
+  - `from_date` (optional, string) - The start date from which to get the transactions (format in seconds or datestring)
+  - `to_date` (optional, string) - The end date to get transactions up to (format in seconds or datestring)
+  - `contract_addresses` (optional, array) - List of contract addresses of transfers
+  - `limit` (optional, integer) - The desired page size of the result
+  - `order` (optional, string) - The order of the result (ASC or DESC)
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
 
 ---
 
@@ -195,17 +195,17 @@
 - **Use this endpoint when:** User asks "what tokens", "token holdings", "ERC20 tokens", "what coins does this wallet have", "show me the tokens", "tokens with prices"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The address from which token balances will be checked
-  - `chain` (optional) - The chain to query
-  - `to_block` (optional) - The block number up to which the balances will be checked
-  - `token_addresses` (optional) - The addresses to get balances for
-  - `exclude_spam` (optional) - Exclude spam tokens from the result
-  - `exclude_unverified_contracts` (optional) - Exclude unverified contracts from the result
-  - `exclude_native` (optional) - Exclude native balance from the result
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
-  - `limit` (optional) - The desired page size of the result
-  - `max_token_inactivity` (optional) - Exclude tokens inactive for more than the given amount of days
-  - `min_pair_side_liquidity_usd` (optional) - Exclude tokens with liquidity less than the specified amount in USD
+  - `address` (required, string) - The address from which token balances will be checked
+  - `chain` (optional, string) - The chain to query
+  - `to_block` (optional, integer) - The block number up to which the balances will be checked
+  - `token_addresses` (optional, array) - The addresses to get balances for
+  - `exclude_spam` (optional, boolean) - Exclude spam tokens from the result
+  - `exclude_unverified_contracts` (optional, boolean) - Exclude unverified contracts from the result
+  - `exclude_native` (optional, boolean) - Exclude native balance from the result
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
+  - `limit` (optional, integer) - The desired page size of the result
+  - `max_token_inactivity` (optional, integer) - Exclude tokens inactive for more than the given amount of days
+  - `min_pair_side_liquidity_usd` (optional, integer) - Exclude tokens with liquidity less than the specified amount in USD
 
 ---
 
@@ -217,9 +217,9 @@
 - **Use this endpoint when:** User asks "multiple addresses", "balances for several wallets", "check multiple addresses"
 - **Auto-chain:** Yes
 - **Params:**
-  - `wallet_addresses` (required) - The addresses to get metadata for
-  - `chain` (optional) - The chain to query
-  - `to_block` (optional) - The block number on which the balances should be checked
+  - `wallet_addresses` (required, array) - The addresses to get metadata for
+  - `chain` (optional, string) - The chain to query
+  - `to_block` (optional, integer) - The block number on which the balances should be checked
 
 ## Get NFTs
 
@@ -229,16 +229,16 @@
 - **Use this endpoint when:** User asks "what NFTs", "NFT collection", "what NFTs does this wallet own", "show NFTs"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The address of the wallet
-  - `chain` (optional) - The chain to query
-  - `format` (optional) - The format of the token ID
-  - `limit` (optional) - The desired page size of the result
-  - `exclude_spam` (optional) - Should spam NFTs be excluded from the result?
-  - `token_addresses` (optional) - The addresses to get balances for
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
-  - `normalizeMetadata` (optional) - Should normalized metadata be returned?
-  - `media_items` (optional) - Should preview media data be returned?
-  - `include_prices` (optional) - Should NFT last sale prices be included in the result?
+  - `address` (required, string) - The address of the wallet
+  - `chain` (optional, string) - The chain to query
+  - `format` (optional, string) - The format of the token ID
+  - `limit` (optional, integer) - The desired page size of the result
+  - `exclude_spam` (optional, boolean) - Should spam NFTs be excluded from the result?
+  - `token_addresses` (optional, array) - The addresses to get balances for
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
+  - `normalizeMetadata` (optional, boolean) - Should normalized metadata be returned?
+  - `media_items` (optional, boolean) - Should preview media data be returned?
+  - `include_prices` (optional, boolean) - Should NFT last sale prices be included in the result?
 - **Spam Detection:** ✅
 
 ---
@@ -251,13 +251,13 @@
 - **Use this endpoint when:** User asks "what NFT collections", "NFT portfolio summary", "group by collection"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The wallet address of the owner of NFTs in the collections
-  - `chain` (optional) - The chain to query
-  - `include_prices` (optional) - Should NFT last sale prices be included in the result?
-  - `limit` (optional) - The desired page size of the result
-  - `exclude_spam` (optional) - Should spam NFTs be excluded from the result?
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
-  - `token_counts` (optional) - Should token counts per collection be included in the response?
+  - `address` (required, string) - The wallet address of the owner of NFTs in the collections
+  - `chain` (optional, string) - The chain to query
+  - `include_prices` (optional, boolean) - Should NFT last sale prices be included in the result?
+  - `limit` (optional, integer) - The desired page size of the result
+  - `exclude_spam` (optional, boolean) - Should spam NFTs be excluded from the result?
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
+  - `token_counts` (optional, boolean) - Should token counts per collection be included in the response?
 - **Spam Detection:** ✅
 
 ## Get DeFi Summary
@@ -268,8 +268,8 @@
 - **Use this endpoint when:** User asks "DeFi summary", "what protocols", "DeFi overview", "protocol exposure"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - Wallet address
-  - `chain` (optional) - The chain to query
+  - `address` (required, string) - Wallet address
+  - `chain` (optional, string) - The chain to query
 
 ---
 
@@ -281,8 +281,8 @@
 - **Use this endpoint when:** User asks "DeFi positions", "liquidity positions", "staking", "lending positions", "yield farming", "where is the liquidity"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - Wallet address
-  - `chain` (optional) - The chain to query
+  - `address` (required, string) - Wallet address
+  - `chain` (optional, string) - The chain to query
 
 ---
 
@@ -294,9 +294,9 @@
 - **Use this endpoint when:** User asks "DeFi positions for specific protocol", "positions in Uniswap", "Aave positions"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - Wallet address
-  - `protocol` (required) - The protocol to query
-  - `chain` (optional) - The chain to query
+  - `address` (required, string) - Wallet address
+  - `protocol` (required, string) - The protocol to query
+  - `chain` (optional, string) - The chain to query
 
 ---
 
@@ -308,12 +308,12 @@
 - **Use this endpoint when:** User asks "net worth", "total value", "what's it worth", "total portfolio value", "across all chains"
 - **Auto-chain:** No (aggregated)
 - **Params:**
-  - `address` (required) - The wallet address
-  - `chains` (optional) - The chains to query
-  - `exclude_spam` (optional) - Exclude spam tokens from the result
-  - `exclude_unverified_contracts` (optional) - Exclude unverified contracts from the result
-  - `max_token_inactivity` (optional) - Exclude tokens inactive for more than the given amount of days
-  - `min_pair_side_liquidity_usd` (optional) - Exclude tokens with liquidity less than the specified amount in USD
+  - `address` (required, string) - The wallet address
+  - `chains` (optional, array) - The chains to query
+  - `exclude_spam` (optional, boolean) - Exclude spam tokens from the result
+  - `exclude_unverified_contracts` (optional, boolean) - Exclude unverified contracts from the result
+  - `max_token_inactivity` (optional, integer) - Exclude tokens inactive for more than the given amount of days
+  - `min_pair_side_liquidity_usd` (optional, integer) - Exclude tokens with liquidity less than the specified amount in USD
 
 ---
 
@@ -325,9 +325,9 @@
 - **Use this endpoint when:** User asks "profitability summary", "PnL overview", "total profit and loss"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The wallet address for which profitability summary is to be retrieved
-  - `days` (optional) - Timeframe in days for the profitability summary (options: 'all', '7', '30')
-  - `chain` (optional) - The chain to query
+  - `address` (required, string) - The wallet address for which profitability summary is to be retrieved
+  - `days` (optional, string) - Timeframe in days for the profitability summary (options: 'all', '7', '30')
+  - `chain` (optional, string) - The chain to query
 
 ---
 
@@ -339,10 +339,10 @@
 - **Use this endpoint when:** User asks "profitability", "PnL", "profit and loss", "gains", "performance", "detailed PnL"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The wallet address for which profitability is to be retrieved
-  - `days` (optional) - Timeframe in days for which profitability is calculated (options: 'all', '7', '30')
-  - `chain` (optional) - The chain to query
-  - `token_addresses` (optional) - The token addresses list to filter the result with
+  - `address` (required, string) - The wallet address for which profitability is to be retrieved
+  - `days` (optional, string) - Timeframe in days for which profitability is calculated (options: 'all', '7', '30')
+  - `chain` (optional, string) - The chain to query
+  - `token_addresses` (optional, array) - The token addresses list to filter the result with
 
 ## Get Wallet Stats
 
@@ -352,8 +352,8 @@
 - **Use this endpoint when:** User asks "wallet stats", "statistics", "wallet metrics", "activity stats"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - Wallet address
-  - `chain` (optional) - The chain to query
+  - `address` (required, string) - Wallet address
+  - `chain` (optional, string) - The chain to query
 
 ---
 
@@ -365,8 +365,8 @@
 - **Use this endpoint when:** User asks "what chains", "which networks", "active chains", "where does this wallet have activity"
 - **Auto-chain:** No
 - **Params:**
-  - `address` (required) - Wallet address
-  - `chains` (optional) - The chains to query
+  - `address` (required, string) - Wallet address
+  - `chains` (optional, array) - The chains to query
 
 ---
 
@@ -378,17 +378,17 @@
 - **Use this endpoint when:** User asks "swaps", "token swaps", "DEX trades", "trading history", "swap history"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The wallet address token-transactions are to be retrieved for
-  - `chain` (optional) - The chain to query
-  - `tokenAddress` (optional) - The token address to get transaction for
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
-  - `limit` (optional) - The desired page size of the result
-  - `fromBlock` (optional) - The minimum block number from which to get the token transactions
-  - `toBlock` (optional) - The block number to get the token transactions from
-  - `fromDate` (optional) - The start date from which to get the token transactions (format in seconds or datestring)
-  - `toDate` (optional) - The end date from which to get the token transactions (format in seconds or datestring)
-  - `order` (optional) - The order of the result (ASC or DESC)
-  - `transactionTypes` (optional) - Array of transaction types (allowed values: 'buy', 'sell')
+  - `address` (required, string) - The wallet address token-transactions are to be retrieved for
+  - `chain` (optional, string) - The chain to query
+  - `tokenAddress` (optional, string) - The token address to get transaction for
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
+  - `limit` (optional, integer) - The desired page size of the result
+  - `fromBlock` (optional, integer) - The minimum block number from which to get the token transactions
+  - `toBlock` (optional, integer) - The block number to get the token transactions from
+  - `fromDate` (optional, string) - The start date from which to get the token transactions (format in seconds or datestring)
+  - `toDate` (optional, string) - The end date from which to get the token transactions (format in seconds or datestring)
+  - `order` (optional, string) - The order of the result (ASC or DESC)
+  - `transactionTypes` (optional, array) - Array of transaction types (allowed values: 'buy', 'sell')
 
 ---
 
@@ -400,10 +400,10 @@
 - **Use this endpoint when:** User asks "approvals", "token approvals", "what contracts are approved", "allowances", "permissions"
 - **Auto-chain:** Yes
 - **Params:**
-  - `address` (required) - The wallet address from which to retrieve active ERC20 token approvals
-  - `chain` (optional) - The chain to query
-  - `limit` (optional) - The desired page size of the result
-  - `cursor` (optional) - The cursor returned in the previous response (used for getting the next page)
+  - `address` (required, string) - The wallet address from which to retrieve active ERC20 token approvals
+  - `chain` (optional, string) - The chain to query
+  - `limit` (optional, integer) - The desired page size of the result
+  - `cursor` (optional, string) - The cursor returned in the previous response (used for getting the next page)
 
 ---
 
@@ -415,7 +415,7 @@
 - **Use this endpoint when:** User asks "ENS name", "ENS domain", "what's the ENS", "reverse resolve"
 - **Auto-chain:** No
 - **Params:**
-  - `address` (required) - The address to be resolved
+  - `address` (required, string) - The address to be resolved
 
 ---
 
@@ -428,7 +428,7 @@
 - **Auto-chain:** No
 - **Example:** `/resolve/ens/vitalik.eth`
 - **Params:**
-  - `domain` (required) - The domain to be resolved
+  - `domain` (required, string) - The domain to be resolved
 
 ---
 
@@ -440,8 +440,8 @@
 - **Use this endpoint when:** User asks "Unstoppable domain", "UD domain", "what's the unstoppable domain"
 - **Auto-chain:** No
 - **Params:**
-  - `address` (required) - The address to be resolved
-  - `currency` (optional) - The currency to query
+  - `address` (required, string) - The address to be resolved
+  - `currency` (optional, string) - The currency to query
 
 ---
 
@@ -454,8 +454,8 @@
 - **Auto-chain:** No
 - **Example:** `/resolve/brad.crypto`
 - **Params:**
-  - `domain` (required) - The domain to be resolved
-  - `currency` (optional) - The currency to query
+  - `domain` (required, string) - The domain to be resolved
+  - `currency` (optional, string) - The currency to query
 
 ---
 

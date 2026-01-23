@@ -38,7 +38,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/:address/nft
 - **Use this endpoint when:** User asks "wallet NFTs", "what NFTs does this wallet own", "NFT portfolio"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`, `format`
+- **Params:** `limit` (integer), `cursor` (string), `format`
 - **Spam Detection:** ✅
 
 ---
@@ -61,7 +61,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address
 - **Use this endpoint when:** User asks "NFTs in this collection", "all NFTs by contract", "show me the collection", "list all NFTs"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`, `format`
+- **Params:** `limit` (integer), `cursor` (string), `format`
 - **Spam Detection:** ✅
 
 ---
@@ -75,7 +75,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id
 - **Use this endpoint when:** User asks "NFT metadata", "this specific NFT", "NFT #123", "show NFT details"
 - **Auto-chain:** Yes
-- **Params:** `format`
+- **Params:** `format` (string)
 
 ---
 
@@ -119,7 +119,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/:address/nft/transfers
 - **Use this endpoint when:** User asks "wallet NFT transfers", "NFTs sent/received by wallet", "wallet NFT activity"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`, `from`, `to`
+- **Params:** `limit` (integer), `cursor` (string), `from`, `to`
 - **Spam Detection:** ✅
 
 ---
@@ -131,7 +131,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/transfers
 - **Use this endpoint when:** User asks "collection transfers", "all transfers for this NFT", "transfer history"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`, `from`, `to`
+- **Params:** `limit` (integer), `cursor` (string), `from`, `to`
 - **Spam Detection:** ✅
 
 ---
@@ -143,7 +143,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/transfers
 - **Use this endpoint when:** User asks "this NFT's transfers", "transfer history for token #123"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`, `from`, `to`
+- **Params:** `limit` (integer), `cursor` (string), `from`, `to`
 - **Spam Detection:** ✅
 
 ---
@@ -157,7 +157,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/:address/nft/collections
 - **Use this endpoint when:** User asks "wallet NFT collections", "what collections does this wallet own", "NFT portfolio summary"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`
+- **Params:** `limit` (integer), `cursor` (string)
 - **Spam Detection:** ✅
 
 ---
@@ -171,7 +171,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/owners
 - **Use this endpoint when:** User asks "who owns these NFTs", "NFT holders", "current owners", "holder list"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`
+- **Params:** `limit` (integer), `cursor` (string)
 - **Spam Detection:** ✅
 
 ---
@@ -216,7 +216,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/floor-price/historical
 - **Use this endpoint when:** User asks "historical floor price", "floor price history", "floor price over time"
 - **Auto-chain:** Yes
-- **Params:** `days`, `fromDate`, `toDate`
+- **Params:** `days` (string), `fromDate` (string), `toDate`
 
 ---
 
@@ -249,7 +249,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/trades
 - **Use this endpoint when:** User asks "NFT trades", "sales history", "who sold this NFT", "market activity"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`, `from`, `to`
+- **Params:** `limit` (integer), `cursor` (string), `from`, `to`
 - **Spam Detection:** ✅
 
 ---
@@ -261,7 +261,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/:token_id/trades
 - **Use this endpoint when:** User asks "trades for this NFT", "trade history for #123"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`, `from`, `to`
+- **Params:** `limit` (integer), `cursor` (string), `from`, `to`
 
 ---
 
@@ -272,7 +272,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/wallets/:address/nfts/trades
 - **Use this endpoint when:** User asks "my NFT trades", "NFT trades by wallet", "what NFTs did this wallet trade"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`, `from`, `to`
+- **Params:** `limit` (integer), `cursor` (string), `from`, `to`
 
 ---
 
@@ -307,7 +307,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/nft/:address/traits/paginate
 - **Use this endpoint when:** User asks "NFT traits", "all traits" (for large collections)
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`
+- **Params:** `limit` (integer), `cursor` (string)
 
 ---
 
@@ -340,7 +340,7 @@
 - **Description:** Get the top NFT collections by market cap. Retrieves collections ranked by market capitalization.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/market-data/nfts/top-collections
 - **Use this endpoint when:** User asks "top NFT collections", "biggest NFT projects", "NFTs by market cap"
-- **Params:** `limit`
+- **Params:** `limit` (integer)
 
 ---
 
@@ -350,7 +350,7 @@
 - **Description:** Get the top NFT collections by trading volume. Retrieves collections ranked by 24h trading volume.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/market-data/nfts/hottest-collections
 - **Use this endpoint when:** User asks "hot NFT collections", "trending NFTs", "top volume NFTs", "most traded NFTs"
-- **Params:** `limit`
+- **Params:** `limit` (integer)
 
 ---
 

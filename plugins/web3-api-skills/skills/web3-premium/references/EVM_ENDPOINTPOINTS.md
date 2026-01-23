@@ -31,7 +31,7 @@
 - **Description:** Get volume statistics by chain. Retrieves DEX trading volume statistics for all chains.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/chains
 - **Use this endpoint when:** User asks "volume by chain", "chain volume", "trading volume", "volume stats"
-- **Params:** `fromDate`, `toDate`
+- **Params:** `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -41,7 +41,7 @@
 - **Description:** Retrieve timeseries volume data by chain. Gets historical volume data over time.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/timeseries
 - **Use this endpoint when:** User asks "volume over time", "historical volume", "timeseries data", "volume chart"
-- **Params:** `chain`, `timeframe`, `fromDate`, `toDate`
+- **Params:** `chain` (string), `timeframe` (string), `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -51,7 +51,7 @@
 - **Description:** Get volume and chain data by categories. Retrieves volume statistics grouped by token categories.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/categories
 - **Use this endpoint when:** User asks "volume categories", "category list", "category volume"
-- **Params:** `chain`, `fromDate`, `toDate`
+- **Params:** `chain` (string), `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -61,7 +61,7 @@
 - **Description:** Retrieve timeseries volume data by category. Gets historical volume data for a specific category.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/timeseries/:category
 - **Use this endpoint when:** User asks "category volume over time"
-- **Params:** `chain`, `timeframe`, `fromDate`, `toDate`
+- **Params:** `chain` (string), `timeframe` (string), `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -111,25 +111,25 @@
 - **Description:** Get token details. Retrieves comprehensive token information from the discovery service.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/discovery/token
 - **Use this endpoint when:** User asks "token details", "discovery info"
-- **Params:** `addresses` (comma-separated token addresses)
+- **Params:** `addresses` (array)
 
 ## Token Score
 - **Endpoint:** `GET /tokens/{tokenAddress}/score`
 - **Description:** Get token score/rating
 - **Use this endpoint when:** User asks "token score", "token rating", "token safety score"
-- **Params:** `chain`
+- **Params:** `chain` (string)
 
 ## Token Score Historical
 - **Endpoint:** `GET /tokens/{tokenAddress}/score/historical`
 - **Description:** Get historical token score
 - **Use this endpoint when:** User asks "token score history", "historical rating"
-- **Params:** `chain`
+- **Params:** `chain` (string)
 
 ## NFT Collection Stats
 - **Endpoint:** `GET /nft/{address}/stats`
 - **Description:** Get NFT collection statistics
 - **Use this endpoint when:** User asks "NFT collection stats", "collection analytics", "NFT statistics"
-- **Params:** `chain`
+- **Params:** `chain` (string)
 
 ## Token Categories
 - **Endpoint:** `GET /tokens/categories`

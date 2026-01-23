@@ -31,9 +31,7 @@
 - **API Reference:** https://solana-gateway.moralis.io/token/:network/:address/price
 - **Use this endpoint when:** User asks "Solana token price", "SPL token price", "how much is this token", "token price USD"
 - **Networks:** mainnet, devnet
-- **Params:**
-  - `network` (required) - The network to query
-  - `address` (required) - The address to query
+- **Params:**- `network` (required, string) - The network to query- `address` (required, string) - The address to query
 
 ---
 
@@ -45,8 +43,7 @@
 - **Use this endpoint when:** User asks "multiple Solana token prices", "batch SPL prices", "prices for several tokens"
 - **Method:** POST with body `{"addresses": ["...", ...]}`
 - **Networks:** mainnet, devnet
-- **Params:**
-  - `network` (required) - The network to query
+- **Params:**- `network` (required, string) - The network to query
 
 ---
 
@@ -57,15 +54,7 @@
 - **API Reference:** https://solana-gateway.moralis.io/token/:network/pairs/:address/ohlcv
 - **Use this endpoint when:** User asks "candlesticks", "OHLCV", "price chart data", "candle data"
 - **Networks:** mainnet, devnet
-- **Params:**
-  - `network` (required) - The network to query
-  - `address` (required) - The address to query (pair address)
-  - `fromDate` (required) - The starting date (format in seconds or datestring)
-  - `toDate` (required) - The ending date (format in seconds or datestring)
-  - `timeframe` (required) - The interval of the candle stick
-  - `currency` (required) - The currency format
-  - `cursor` (optional) - The cursor to the next page
-  - `limit` (optional) - The limit per page
+- **Params:**- `network` (required, string) - The network to query- `address` (required, string) - The address to query (pair address)- `fromDate` (required, string) - The starting date (format in seconds or datestring)- `toDate` (required, string) - The ending date (format in seconds or datestring)- `timeframe` (required, string) - The interval of the candle stick- `currency` (required, string) - The currency format- `cursor` (optional, string) - The cursor to the next page- `limit` (optional, integer) - The limit per page
 
 ---
 

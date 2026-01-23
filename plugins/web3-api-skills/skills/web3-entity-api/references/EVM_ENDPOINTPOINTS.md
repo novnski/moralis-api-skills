@@ -26,9 +26,7 @@
 - **Description:** Search for entities, addresses, and categories. Searches through labeled entities including exchanges, funds, DeFi protocols, whales, and DEX traders.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/entities/search
 - **Use this endpoint when:** User asks "search entities", "find exchanges", "look up funds", "search for Binance", "find a16z"
-- **Params:**
-  - `query` (required) - The search query
-  - `limit` (optional) - The desired page size of the result
+- **Params:**- `query` (required, string) - The search query- `limit` (optional, integer) - The desired page size of the result
 
 ---
 
@@ -38,8 +36,7 @@
 - **Description:** Get entity categories. Retrieves all available entity categories/types in the system.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/entities/categories
 - **Use this endpoint when:** User asks "entity categories", "what types of entities", "list categories", "entity types"
-- **Params:**
-  - `limit` (optional) - The desired page size of the result
+- **Params:**- `limit` (optional, integer) - The desired page size of the result
 
 ---
 
@@ -49,9 +46,7 @@
 - **Description:** Get entities by category. Retrieves all labeled entities belonging to a specific category.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/entities/categories/:categoryId
 - **Use this endpoint when:** User asks "all exchanges", "all funds", "entities in category", "list [type] entities"
-- **Params:**
-  - `categoryId` (required) - The category ID
-  - `limit` (optional) - The desired page size of the result
+- **Params:**- `categoryId` (required, string) - The category ID- `limit` (optional, integer) - The desired page size of the result
 
 ---
 
@@ -61,8 +56,7 @@
 - **Description:** Get entity by ID. Retrieves detailed information about a specific labeled entity including associated addresses and metadata.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/entities/:entityId
 - **Use this endpoint when:** User asks "entity details", "entity info", "show me this entity", "entity data"
-- **Params:**
-  - `entityId` (required) - The entity ID
+- **Params:**- `entityId` (required, string) - The entity ID
 
 ## Supported Entity Categories
 

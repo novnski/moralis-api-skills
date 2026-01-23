@@ -82,7 +82,7 @@
 - **Description:** Get new tokens by exchange. Retrieves tokens that have recently launched on Pump.fun or other DEXs.
 - **API Reference:** https://solana-gateway.moralis.io/token/mainnet/exchange/:exchange/new
 - **Use this endpoint when:** User asks "Pump.fun active tokens", "new tokens", "currently bonding"
-- **Params:** `limit` (default 100)
+- **Params:** `limit` (integer) (default 100)
 - **Exchanges:** pumpfun, raydium, etc.
 
 ---
@@ -93,7 +93,7 @@
 - **Description:** Get tokens in bonding phase by exchange. Retrieves tokens currently in the bonding curve phase.
 - **API Reference:** https://solana-gateway.moralis.io/token/mainnet/exchange/:exchange/bonding
 - **Use this endpoint when:** User asks "bonding tokens", "tokens in bonding", "bonding curve tokens"
-- **Params:** `limit` (default 100)
+- **Params:** `limit` (integer) (default 100)
 
 ---
 
@@ -103,7 +103,7 @@
 - **Description:** Get graduated tokens by exchange. Retrieves tokens that have graduated from bonding to full DEX listing.
 - **API Reference:** https://solana-gateway.moralis.io/token/mainnet/exchange/:exchange/graduated
 - **Use this endpoint when:** User asks "completed Pump.fun tokens", "graduated tokens", "bonding curve complete"
-- **Params:** `limit` (default 100)
+- **Params:** `limit` (integer) (default 100)
 
 ---
 
@@ -144,7 +144,7 @@
 - **Description:** Get historical token holder statistics. Retrieves historical holder statistics over time.
 - **API Reference:** https://solana-gateway.moralis.io/token/mainnet/holders/:address/historical
 - **Use this endpoint when:** User asks "historical holders", "holder changes over time", "holder count history"
-- **Params:** `timeFrame` (e.g., "1d", "7d")
+- **Params:** `timeFrame` (string) (e.g., "1d", "7d")
 
 ---
 
@@ -240,7 +240,7 @@
 - **Description:** Get timeseries token analytics. Retrieves historical analytics data over time.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/tokens/analytics/timeseries
 - **Use this endpoint when:** User asks "analytics over time", "historical analytics"
-- **Params:** `address`, `chain=solana`, `timeframe`, `fromDate`, `toDate`
+- **Params:** `address` (string), `chain=solana` (string), `timeframe`, `fromDate`, `toDate`
 
 ---
 
@@ -252,7 +252,7 @@
 - **Description:** Get volume statistics by chain. Retrieves DEX trading volume statistics.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/chains
 - **Use this endpoint when:** User asks "volume by chain", "trading volume stats"
-- **Params:** `fromDate`, `toDate`
+- **Params:** `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -262,7 +262,7 @@
 - **Description:** Get volume and chain data by categories. Retrieves volume statistics grouped by token categories.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/categories
 - **Use this endpoint when:** User asks "volume by category", "category stats"
-- **Params:** `chain=solana`, `fromDate`, `toDate`
+- **Params:** `chain=solana` (string), `fromDate` (string), `toDate`
 
 ---
 
@@ -272,7 +272,7 @@
 - **Description:** Retrieve timeseries volume data by chain. Gets historical volume data over time.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/timeseries
 - **Use this endpoint when:** User asks "volume over time", "historical volume"
-- **Params:** `chain=solana`, `timeframe`, `fromDate`, `toDate`
+- **Params:** `chain=solana` (string), `timeframe` (string), `fromDate`, `toDate`
 
 ---
 
@@ -282,7 +282,7 @@
 - **Description:** Retrieve timeseries volume data by category. Gets historical volume data for a specific category.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/timeseries/:category
 - **Use this endpoint when:** User asks "category volume over time"
-- **Params:** `chain=solana`, `timeframe`, `fromDate`, `toDate`
+- **Params:** `chain=solana` (string), `timeframe` (string), `fromDate`, `toDate`
 
 ---
 
@@ -316,7 +316,7 @@
 - **API Reference:** https://solana-gateway.moralis.io/token/:network/pairs/:pairAddress/ohlcv
 - **Use this endpoint when:** User asks "candlesticks", "OHLCV", "price chart data"
 - **Networks:** mainnet, devnet
-- **Params:** `timeframe`, `fromDate`, `toDate`
+- **Params:** `timeframe` (string), `fromDate` (string), `toDate`
 
 ---
 
@@ -363,7 +363,7 @@
 - **Description:** Get trending tokens. Retrieves tokens trending based on social sentiment.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/tokens/trending
 - **Use this endpoint when:** User asks "trending tokens", "hot tokens"
-- **Params:** `chain=solana`, `limit`
+- **Params:** `chain=solana` (string), `limit` (integer)
 
 ---
 

@@ -8,10 +8,7 @@ This reference lists Streams API endpoints and request shapes from the swagger f
 GET /streams/evm
 ```
 
-Query parameters:
-- `limit` (required) - Max 100
-- `cursor` (optional) - For pagination
-- `status` (optional) - Filter by status
+Query parameters:- `limit` (required, integer) - Max 100- `cursor` (optional, string) - For pagination- `status` (optional, string) - Filter by status
 
 ## Create a Stream
 
@@ -87,9 +84,7 @@ Request body:
 GET /streams/evm/{id}/address
 ```
 
-Query parameters:
-- `limit` (required) - Max 100
-- `cursor` (optional) - For pagination
+Query parameters:- `limit` (required, integer) - Max 100- `cursor` (optional, string) - For pagination
 
 Add addresses:
 ```
@@ -144,31 +139,13 @@ POST /streams/evm/{chainId}/block-to-webhook/{blockNumber}/{streamId}
 GET /history
 ```
 
-Query parameters:
-- `limit` (required) - Max 100
-- `cursor` (optional)
-- `transactionHash` (optional)
-- `excludePayload` (optional) - boolean
-- `streamId` (optional)
-- `chainId` (optional) - array
-- `blockNumber` (optional) - array
-- `fromTimestamp` (optional) - number
-- `toTimestamp` (optional) - number
+Query parameters:- `limit` (required, integer) - Max 100- `cursor` (optional, string) - `transactionHash` (optional)- `excludePayload` (optional, boolean) - boolean- `streamId` (optional, string) - `chainId` (optional) - array- `blockNumber` (optional, integer) - array- `fromTimestamp` (optional, integer) - number- `toTimestamp` (optional, integer) - number
 
 ```
 GET /history/logs
 ```
 
-Query parameters:
-- `limit` (required) - Max 100
-- `cursor` (optional)
-- `streamId` (optional)
-- `transactionHash` (optional)
-- `deliveryStatus` (optional) - array
-- `chainId` (optional) - array
-- `blockNumber` (optional) - array
-- `fromTimestamp` (optional) - number
-- `toTimestamp` (optional) - number
+Query parameters:- `limit` (required, integer) - Max 100- `cursor` (optional, string) - `streamId` (optional)- `transactionHash` (optional, string) - `deliveryStatus` (optional) - array- `chainId` (optional, string) - array- `blockNumber` (optional, integer) - array- `fromTimestamp` (optional, integer) - number- `toTimestamp` (optional, integer) - number
 
 Replay a delivery:
 ```

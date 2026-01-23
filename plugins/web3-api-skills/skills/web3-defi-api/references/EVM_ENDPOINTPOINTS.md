@@ -26,9 +26,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/wallets/:address/defi/summary
 - **Use this endpoint when:** User asks "DeFi summary", "what protocols", "DeFi overview", "protocol exposure", "which DeFi protocols"
 - **Auto-chain:** Yes
-- **Params:**
-  - `address` (required) - Wallet address
-  - `chain` (optional) - The chain to query
+- **Params:**- `address` (required, string) - Wallet address- `chain` (optional, string) - The chain to query
 
 ---
 
@@ -39,9 +37,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/wallets/:address/defi/positions
 - **Use this endpoint when:** User asks "DeFi positions", "liquidity positions", "staking", "yield farming", "lending positions", "where is the liquidity"
 - **Auto-chain:** Yes
-- **Params:**
-  - `address` (required) - Wallet address
-  - `chain` (optional) - The chain to query
+- **Params:**- `address` (required, string) - Wallet address- `chain` (optional, string) - The chain to query
 
 ---
 
@@ -53,10 +49,7 @@
 - **Use this endpoint when:** User asks "Aave positions", "Uniswap positions", "positions in [protocol]", "what's in [protocol]"
 - **Auto-chain:** Yes
 - **Protocols:** aave-v2, aave-v3, compound-v2, compound-v3, uniswap-v2, uniswap-v3, sushiswap, curve, yearn-v2, yearn-v3, etc.
-- **Params:**
-  - `address` (required) - Wallet address
-  - `protocol` (required) - The protocol to query
-  - `chain` (optional) - The chain to query
+- **Params:**- `address` (required, string) - Wallet address- `protocol` (required, defiProtocolList) - The protocol to query- `chain` (optional, string) - The chain to query
 
 ## Supported DeFi Protocols
 

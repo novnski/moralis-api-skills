@@ -43,7 +43,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/:address/erc20
 - **Use this endpoint when:** User asks "ERC20 balances", "token balances without prices", "what ERC20 tokens"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`
+- **Params:** `limit` (integer), `cursor` (string)
 - **Note:** This endpoint is also documented in `web3-wallet-api`
 
 ---
@@ -55,7 +55,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/wallets/:address/tokens
 - **Use this endpoint when:** User asks "token balance", "how many tokens does this wallet have", "check wallet token balances", "tokens with prices"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`
+- **Params:** `limit` (integer), `cursor` (string)
 - **Note:** This endpoint is also documented in `web3-wallet-api`
 
 ---
@@ -101,7 +101,7 @@
 - **Description:** Get token details. Retrieves comprehensive token information from the discovery service.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/discovery/token
 - **Use this endpoint when:** User asks "token details", "discovery info", "comprehensive token data"
-- **Params:** `addresses` (comma-separated token addresses)
+- **Params:** `addresses` (array)
 
 ---
 
@@ -114,7 +114,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/:address/price
 - **Use this endpoint when:** User asks "token price", "how much is this token worth", "current price", "USD price"
 - **Auto-chain:** Yes
-- **Params:** `include` (optional: "percent_change")
+- **Params:** `include` (string)
 
 ---
 
@@ -125,7 +125,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/prices
 - **Use this endpoint when:** User asks "multiple token prices", "price of these tokens", "batch prices", "check prices for..."
 - **Method:** POST with body `{"addresses": ["0x...", ...]}`
-- **Params:** `include` (optional: "percent_change")
+- **Params:** `include` (string)
 
 ---
 
@@ -136,7 +136,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/pairs/:address/ohlcv
 - **Use this endpoint when:** User asks "candlesticks", "OHLCV", "price chart data", "candle data"
 - **Auto-chain:** Yes
-- **Params:** `timeframe` (1m, 5m, 15m, 1h, 4h, 1d), `fromDate`, `toDate`
+- **Params:** `timeframe` (string), `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -149,7 +149,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/pairs/:address/swaps
 - **Use this endpoint when:** User asks "pair swaps", "trades on this pair", "pair volume"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `from`, `to`
+- **Params:** `limit` (integer), `from` (integer), `to` (integer)
 
 ---
 
@@ -160,7 +160,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/:address/swaps
 - **Use this endpoint when:** User asks "token swaps", "swap history", "trading activity", "who's swapping this token"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `from`, `to`
+- **Params:** `limit` (integer), `from` (integer), `to` (integer)
 
 ---
 
@@ -171,7 +171,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/wallets/:address/swaps
 - **Use this endpoint when:** User asks "my swaps", "wallet swaps", "what swaps did this wallet do"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `from`, `to`
+- **Params:** `limit` (integer), `from` (integer), `to` (integer)
 - **Note:** This endpoint is also documented in `web3-wallet-api`
 
 ---
@@ -185,7 +185,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/:address/erc20/transfers
 - **Use this endpoint when:** User asks "my token transfers", "wallet transfers", "tokens sent/received"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`, `from`, `to`
+- **Params:** `limit` (integer), `cursor` (string), `from` (integer), `to` (integer)
 - **Note:** This endpoint is also documented in `web3-wallet-api`
 
 ---
@@ -197,7 +197,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/:address/transfers
 - **Use this endpoint when:** User asks "token transfers", "transfer history", "token movement", "who's transferring"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`, `from`, `to`
+- **Params:** `limit` (integer), `cursor` (string), `from` (integer), `to` (integer)
 
 ---
 
@@ -221,7 +221,7 @@
 - **Description:** Get volume statistics by chain. Retrieves DEX trading volume statistics for all chains.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/chains
 - **Use this endpoint when:** User asks "volume by chain", "trading volume stats", "DEX volume"
-- **Params:** `fromDate`, `toDate`
+- **Params:** `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -231,7 +231,7 @@
 - **Description:** Get volume and chain data by categories. Retrieves volume statistics grouped by token categories.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/categories
 - **Use this endpoint when:** User asks "volume by category", "category stats", "sector volume"
-- **Params:** `chain`, `fromDate`, `toDate`
+- **Params:** `chain` (string), `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -241,7 +241,7 @@
 - **Description:** Retrieve timeseries volume data by chain. Gets historical volume data over time.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/timeseries
 - **Use this endpoint when:** User asks "volume over time", "historical volume", "volume timeseries"
-- **Params:** `chain`, `timeframe`, `fromDate`, `toDate`
+- **Params:** `chain` (string), `timeframe` (string), `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -251,7 +251,7 @@
 - **Description:** Retrieve timeseries volume data by category. Gets historical volume data for a specific category.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/volume/timeseries/:category
 - **Use this endpoint when:** User asks "category volume over time", "historical category volume"
-- **Params:** `chain`, `timeframe`, `fromDate`, `toDate`
+- **Params:** `chain` (string), `timeframe` (string), `fromDate` (string), `toDate` (string)
 - **Example:** `/volume/timeseries/artificial-intelligence`
 
 ---
@@ -265,7 +265,7 @@
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/:token_address/pairs
 - **Use this endpoint when:** User asks "trading pairs", "DEX pairs", "where is this token traded", "liquidity pairs", "available pairs"
 - **Auto-chain:** Yes
-- **Params:** `limit`, `cursor`
+- **Params:** `limit` (integer), `cursor` (string)
 
 ---
 
@@ -318,7 +318,7 @@
 - **Description:** Get timeseries token analytics. Retrieves historical analytics data over time.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/tokens/analytics/timeseries
 - **Use this endpoint when:** User asks "analytics over time", "historical analytics", "timeseries analytics"
-- **Params:** `address`, `timeframe`, `fromDate`, `toDate`
+- **Params:** `address` (string), `timeframe` (string), `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -330,7 +330,7 @@
 - **Description:** Get newly launched tokens by exchange. Retrieves tokens that have recently launched on a DEX.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/exchange/:exchange/new
 - **Use this endpoint when:** User asks "new tokens", "newly launched", "just launched tokens"
-- **Params:** `limit`
+- **Params:** `limit` (integer)
 - **Example exchanges:** "uniswap-v2", "uniswap-v3", "sushiswap"
 
 ---
@@ -341,7 +341,7 @@
 - **Description:** Get bonding tokens by exchange. Retrieves tokens currently in the bonding curve phase.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/exchange/:exchange/bonding
 - **Use this endpoint when:** User asks "bonding tokens", "tokens in bonding", "bonding curve tokens"
-- **Params:** `limit`
+- **Params:** `limit` (integer)
 
 ---
 
@@ -351,7 +351,7 @@
 - **Description:** Get graduated tokens by exchange. Retrieves tokens that have graduated from bonding to full DEX listing.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/exchange/:exchange/graduated
 - **Use this endpoint when:** User asks "graduated tokens", "tokens that graduated"
-- **Params:** `limit`
+- **Params:** `limit` (integer)
 
 ---
 
@@ -385,7 +385,7 @@
 - **Description:** Get ERC20 Token Holders. Retrieves the current holders of a token.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/:token_address/owners
 - **Use this endpoint when:** User asks "token holders", "who owns this token", "whale holders", "top holders"
-- **Params:** `limit`, `cursor`
+- **Params:** `limit` (integer), `cursor` (string)
 
 ---
 
@@ -395,7 +395,7 @@
 - **Description:** Get ERC20 Token Holders Stats. Retrieves statistics about token holders.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/:token_address/holders
 - **Use this endpoint when:** User asks "holder stats", "holder statistics", "holder data"
-- **Params:** `limit`, `cursor`
+- **Params:** `limit` (integer), `cursor` (string)
 
 ---
 
@@ -405,7 +405,7 @@
 - **Description:** Get ERC20 token holders stats timeseries. Retrieves historical holder statistics over time.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/erc20/:token_address/holders/historical
 - **Use this endpoint when:** User asks "historical holders", "holder count over time", "holder history"
-- **Params:** `fromDate`, `toDate`
+- **Params:** `fromDate` (string), `toDate` (string)
 
 ---
 
@@ -441,7 +441,7 @@
 - **Description:** Get trending tokens. Retrieves tokens trending based on social sentiment and mentions.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/tokens/trending
 - **Use this endpoint when:** User asks "trending tokens", "hot tokens", "popular tokens", "what's trending"
-- **Params:** `chain`, `limit`
+- **Params:** `chain` (string), `limit` (integer)
 
 ---
 
@@ -451,7 +451,7 @@
 - **Description:** Get tokens with top gainers. Retrieves tokens with the highest price increases.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/discovery/tokens/top-gainers
 - **Use this endpoint when:** User asks "top gainers", "biggest gainers", "tokens that went up"
-- **Params:** `chain`, `limit`
+- **Params:** `chain` (string), `limit` (integer)
 
 ---
 
@@ -461,7 +461,7 @@
 - **Description:** Get tokens with top losers. Retrieves tokens with the highest price decreases.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/discovery/tokens/top-losers
 - **Use this endpoint when:** User asks "top losers", "biggest losers", "tokens that went down"
-- **Params:** `chain`, `limit`
+- **Params:** `chain` (string), `limit` (integer)
 
 ---
 
@@ -471,7 +471,7 @@
 - **Description:** Get the top ERC20 tokens by market cap. Retrieves tokens ranked by market capitalization.
 - **API Reference:** https://deep-index.moralis.io/api/v2.2/market-data/erc20s/top-tokens
 - **Use this endpoint when:** User asks "top tokens", "biggest tokens", "tokens by market cap", "largest tokens"
-- **Params:** `chain`, `limit`
+- **Params:** `chain` (string), `limit` (integer)
 
 ---
 

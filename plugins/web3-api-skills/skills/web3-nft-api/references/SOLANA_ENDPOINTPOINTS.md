@@ -24,10 +24,7 @@
 - **API Reference:** https://solana-gateway.moralis.io/nft/:network/:address/metadata
 - **Use this endpoint when:** User asks "Solana NFT metadata", "contract info", "NFT details", "collection metadata", "mint metadata"
 - **Networks:** mainnet, devnet
-- **Params:**
-  - `network` (required) - The network to query
-  - `address` (required) - The address to query
-  - `mediaItems` (optional) - Should return media items
+- **Params:**- `network` (required, string) - The network to query- `address` (required, string) - The address to query- `mediaItems` (optional, boolean) - Should return media items
 
 ---
 
@@ -38,13 +35,7 @@
 - **API Reference:** https://solana-gateway.moralis.io/account/:network/:address/nft
 - **Use this endpoint when:** User asks "wallet NFTs", "what NFTs does this wallet own", "Solana NFT portfolio", "NFT collection"
 - **Networks:** mainnet, devnet
-- **Params:**
-  - `network` (required) - The network to query
-  - `address` (required) - The address to query
-  - `nftMetadata` (optional) - Should return the full NFT metadata
-  - `mediaItems` (optional) - Should return media items
-  - `excludeSpam` (optional) - Should exclude spam NFTs
-  - `includeFungibleAssets` (optional) - Should include fungible assets (tokenStandard:1)
+- **Params:**- `network` (required, string) - The network to query- `address` (required, string) - The address to query- `nftMetadata` (optional, boolean) - Should return the full NFT metadata- `mediaItems` (optional, boolean) - Should return media items- `excludeSpam` (optional, boolean) - Should exclude spam NFTs- `includeFungibleAssets` (optional, boolean) - Should include fungible assets (tokenStandard:1)
 
 ---
 
