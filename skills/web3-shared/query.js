@@ -325,25 +325,30 @@ function detectBlockchain(address, context = {}) {
 
   // Detect from context
   if (context.chain) {
-    // Input validation: Ensure chain is a string and not empty
-    if (
-      typeof context.chain !== "string" ||
-      context.chain.trim().length === 0
-    ) {
+    // Input validation: Ensure chain is a string
+    if (typeof context.chain !== "string") {
+      throw new Error("Invalid chain parameter: must be a string");
+    }
+
+    // Trim whitespace for validation
+    const trimmedChain = context.chain.trim();
+
+    // Check for empty or whitespace-only strings
+    if (trimmedChain.length === 0) {
       throw new Error("Invalid chain parameter: must be a non-empty string");
     }
 
     // Check for potential injection attempts (command metacharacters)
     const dangerousChars = /[;&|`$()]/;
-    if (dangerousChars.test(context.chain)) {
+    if (dangerousChars.test(trimmedChain)) {
       throw new Error("Invalid chain parameter: contains dangerous characters");
     }
 
     const solanaChains = ["sol", "solana", "mainnet", "devnet"];
-    if (solanaChains.includes(context.chain.toLowerCase())) {
+    if (solanaChains.includes(trimmedChain.toLowerCase())) {
       return { type: "solana", network: context.network || "mainnet" };
     }
-    return { type: "evm", chain: chainToHex(context.chain) };
+    return { type: "evm", chain: chainToHex(trimmedChain) };
   }
 
   // Default to EVM Ethereum
