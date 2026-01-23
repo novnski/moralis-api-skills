@@ -5,7 +5,7 @@ title: Usage Examples
 
 # Usage Examples
 
-Common queries and patterns for using Web3 Skills.
+Common queries and patterns for using Web3 Skills and Streams.
 
 ## Wallet Queries
 
@@ -196,3 +196,11 @@ Just ask Claude naturally:
 - "Get DeFi positions for 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
 
 Claude will automatically detect the blockchain and use the appropriate skill.
+
+## Streams Examples
+
+Create and manage streams via natural language:
+
+- "Create a stream to monitor all ERC20 transfers on Ethereum"
+- "Pause the stream with ID a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+- "Add address 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 to stream"
