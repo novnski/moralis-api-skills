@@ -37,6 +37,12 @@ Use this skill when the user asks about:
 - "Trending tokens", "Hot tokens", "Popular tokens"
 - "Token stats", "Token statistics", "Market data"
 
+**Token Security & Analytics:**
+- "Token score", "Token trust score", "Is this token safe?"
+- "Token analytics", "Token statistics", "Historical data"
+- "Snipers detection", "Early buyers", "Sniped tokens"
+- "Bonding curve status", "Is token on bonding curve?"
+
 **Solana-Specific:**
 - "Pump.fun tokens", "Bonding curve status", "New Solana tokens"
 - "SPL token info", "Solana token metadata"
@@ -270,6 +276,144 @@ query('/token/:network/:address/bonding-status', {
   network: 'mainnet'
 })
   .then(data => console.log('Is Bonding:', data.bonding))
+  .catch(console.error);
+"
+```
+
+### Get Token Security Score
+
+**Check token trust/quality score:**
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/tokens/:tokenAddress/score', {
+  address: '0x6B175474E89094C44Da98b954EedeAC495271d0F'
+})
+  .then(data => console.log('Token Score:', data))
+  .catch(console.error);
+"
+```
+
+The score helps assess token security and legitimacy.
+
+### Get Token Snipers
+
+**Identify early buyers of a DEX pair:**
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/pairs/:address/snipers', {
+  address: '0x1234...', // DEX pair address
+  params: { limit: 10 }
+})
+  .then(data => console.log('Snipers:', data.result))
+  .catch(console.error);
+"
+```
+
+Useful for detecting sniping activity on new token launches.
+
+### Check Token Bonding Status (EVM)
+
+**Check if token is on bonding curve vs graduated:**
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/erc20/:address/bondingStatus', {
+  address: '0x6B175474E89094C44Da98b954EedeAC495271d0F'
+})
+  .then(data => console.log('Bonding Status:', data))
+  .catch(console.error);
+"
+```
+
+### Get Token Analytics
+
+**Detailed token analytics:**
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/tokens/:address/analytics', {
+  address: '0x6B175474E89094C44Da98b954EedeAC495271d0F'
+})
+  .then(data => console.log('Analytics:', data))
+  .catch(console.error);
+"
+```
+
+**Historical time series analytics:**
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/tokens/analytics/timeseries', {
+  params: {
+    token_addresses: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+    from_date: '2024-01-01',
+    to_date: '2024-12-31'
+  }
+})
+  .then(data => console.log('Time Series:', data.result))
+  .catch(console.error);
+"
+```
+
+**Token statistics:**
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/tokens/:address/stats', {
+  address: '0x6B175474E89094C44Da98b954EedeAC495271d0F'
+})
+  .then(data => console.log('Stats:', data))
+  .catch(console.error);
+"
+```
+
+### Get Volume Timeseries
+
+**Historical volume data by chain and category:**
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/volume/timeseries', {
+  params: {
+    chain: '0x1',
+    from_date: '2024-01-01',
+    to_date: '2024-12-31'
+  }
+})
+  .then(data => console.log('Volume History:', data.result))
+  .catch(console.error);
+"
+```
+
+### Get Historical Token Holder Stats
+
+**Track holder count over time:**
+
+```bash
+cd $SKILL_DIR
+node -e "
+const { query } = require('./query');
+query('/erc20/:token_address/holders/historical', {
+  address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+  params: { limit: 30 }
+})
+  .then(data => console.log('Holder History:', data.result))
   .catch(console.error);
 "
 ```

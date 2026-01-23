@@ -120,29 +120,30 @@
 
 ### Get Token Top Holders
 
-- **Endpoint:** `GET /token/mainnet/holders/:address`
+- **Endpoint:** `GET /token/mainnet/:address/holders`
 - **Description:** Get token top holders. Retrieves the top holders of a specific SPL token.
-- **API Reference:** https://solana-gateway.moralis.io/token/mainnet/holders/:address
+- **API Reference:** https://solana-gateway.moralis.io/token/mainnet/:address/holders
 - **Use this endpoint when:** User asks "top holders", "whale holders", "biggest holders"
-- **Note:** The path structure is `/holders/:address` not `:address/holders`
+- **Params:** `limit` (integer), `cursor` (string)
 
 ---
 
 ### Get Token Holder Stats
 
-- **Endpoint:** `GET /token/mainnet/holders/:address`
+- **Endpoint:** `GET /token/mainnet/:address/holders`
 - **Description:** Get token holder statistics. Retrieves statistics about token holders including count and distribution.
-- **API Reference:** https://solana-gateway.moralis.io/token/mainnet/holders/:address
+- **API Reference:** https://solana-gateway.moralis.io/token/mainnet/:address/holders
 - **Use this endpoint when:** User asks "holder stats", "holder statistics", "holder data"
+- **Params:** `limit` (integer), `cursor` (string)
 - **Note:** Same endpoint as top holders, different response fields
 
 ---
 
 ### Get Historical Token Holders
 
-- **Endpoint:** `GET /token/mainnet/holders/:address/historical`
+- **Endpoint:** `GET /token/mainnet/:address/holders/historical`
 - **Description:** Get historical token holder statistics. Retrieves historical holder statistics over time.
-- **API Reference:** https://solana-gateway.moralis.io/token/mainnet/holders/:address/historical
+- **API Reference:** https://solana-gateway.moralis.io/token/mainnet/:address/holders/historical
 - **Use this endpoint when:** User asks "historical holders", "holder changes over time", "holder count history"
 - **Params:** `timeFrame` (string) (e.g., "1d", "7d")
 
