@@ -50,7 +50,7 @@ Use this skill when the user asks about:
 
 ### Confusion: Entity Search vs Token Search
 - **Search entities (exchanges, funds):** Use this skill (`web3-entity-api`) with `/entities/search`
-- **Search tokens:** Use `web3-token-api` with `/erc20/search`
+- **Search tokens:** Use `web3-token-api` with `/tokens/search`
 
 ### Confusion: Entity Categories vs NFT Collections
 - **Entity categories (exchanges, funds):** Use this skill (`web3-entity-api`)
@@ -100,7 +100,7 @@ query('/entities/categories')
 cd $SKILL_DIR
 node -e "
 const { query } = require('./query');
-query('/entities/categories/:categoryId/entities', { params: { chain: 'eth' }})
+query('/entities/categories/:categoryId', { params: { chain: 'eth' }})
   .then(data => console.log('Entities:', data.result))
   .catch(console.error);
 "
