@@ -48,25 +48,21 @@ Use this skill when the user asks about:
 **⚠️ NOT for:**
 - NFT prices (floor/sales) without metadata → Use `web3-price-api`
 - Wallet's NFTs with portfolio view → Use `web3-wallet-api`
-- Individual NFT transfers to/from wallet → Use `web3-wallet-api` with `/:address/nft/transfers`
+- Individual NFT transfers to/from wallet → Use `web3-wallet-api` with `/wallets/:address/history`
 
 ## Common Pitfalls
 
 ### Confusion: NFT Metadata vs Floor Price
 - **NFT metadata/traits:** Use this skill (`web3-nft-api`) with `/nft/:address` or `/nft/:address/traits`
-- **Floor price only:** Use `web3-price-api` with `/nft/:address/lowestprice`
+- **Floor price only:** Use `web3-price-api` with `/nft/:address/floor-price`
 
 ### Confusion: NFT Transfers by Contract vs by Wallet
 - **All transfers for a collection:** Use this skill (`web3-nft-api`) with `/nft/:address/transfers`
-- **NFT transfers to/from a wallet:** Use `web3-wallet-api` with `/:address/nft/transfers`
+- **NFT transfers to/from a wallet:** Use `web3-wallet-api` with `/wallets/:address/history`
 
 ### Confusion: All NFTs by Wallet vs NFTs by Collection
 - **All NFTs owned by wallet:** Use `web3-wallet-api` with `/:address/nft`
 - **All NFTs in a collection:** Use this skill (`web3-nft-api`) with `/nft/:address`
-
-### Confusion: NFT Metadata vs Metadata URI
-- **Resolved NFT metadata:** Use this skill (`web3-nft-api`) with `/nft/:address` (auto-fetches from URI)
-- **Raw metadata from URI:** Use this skill (`web3-nft-api`) with `/nft/resolve` (manual URI lookup)
 
 ## Setup
 
@@ -167,19 +163,7 @@ query('/nft/:address/transfers', {
 "
 ```
 
-**By Wallet:**
-```bash
-cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/:address/nft/transfers', {
-  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-  params: { limit: 10 }
-})
-  .then(data => console.log('Transfers:', data.result?.length || 0))
-  .catch(console.error);
-"
-```
+**Wallet activity (includes NFT transfers):** Use `web3-wallet-api` with `/wallets/:address/history`.
 
 ### Get NFT Owners
 
@@ -225,20 +209,6 @@ query('/:address/nft/collections', {
 "
 ```
 
-### Get Top NFT Collections
-
-```bash
-cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/nft/collections/trending', {
-  params: { chain: 'eth' }
-})
-  .then(data => console.log('Trending:', data.result?.length || 0))
-  .catch(console.error);
-"
-```
-
 ### Get NFT Trades
 
 ```bash
@@ -254,45 +224,17 @@ query('/nft/:address/trades', {
 "
 ```
 
-### Get NFT Metadata from URI
+### Get NFT Floor Price
 
 ```bash
 cd $SKILL_DIR
 node -e "
 const { query } = require('./query');
-query('/nft/resolve', {
-  params: { uri: 'ipfs://Qm...' }
-})
-  .then(data => console.log(JSON.stringify(data, null, 2)))
-  .catch(console.error);
-"
-```
-
-### Get NFT Lowest Price
-
-```bash
-cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/nft/:address/lowestprice', {
+query('/nft/:address/floor-price', {
   address: '0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d',
   params: { chain: 'eth' }
 })
   .then(data => console.log('Floor Price:', JSON.stringify(data, null, 2)))
-  .catch(console.error);
-"
-```
-
-### Search NFTs
-
-```bash
-cd $SKILL_DIR
-node -e "
-const { query } = require('./query');
-query('/nft/search', {
-  params: { q: 'bored ape', chain: 'eth', limit: 10 }
-})
-  .then(data => console.log('Results:', data.result?.length || 0))
   .catch(console.error);
 "
 ```

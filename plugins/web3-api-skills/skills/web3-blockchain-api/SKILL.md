@@ -4,9 +4,9 @@ description: Query blockchain data including blocks, transactions, and decoded t
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed). EVM chains only - not supported on Solana.
 metadata:
-  version: "1.0.0"
-  author: web3-skills
-  tags: [web3, blockchain, block, transaction, evm]
+    version: "1.0.0"
+    author: web3-skills
+    tags: [web3, blockchain, block, transaction, evm]
 ---
 
 # Web3 Blockchain API (EVM Only)
@@ -18,40 +18,48 @@ Query blocks and transactions on EVM chains.
 Use this skill when the user asks about:
 
 **Block Data:**
+
 - "Block data", "Block information", "Block details"
 - "Block by number", "Block by hash", "Get block [number]"
 - "Block by date", "What block was on [date]?"
 
 **Transaction Data:**
+
 - "Transaction details", "Transaction info", "TX details"
 - "Transaction by hash", "Get transaction [hash]"
 - "Decoded transaction", "What function was called?", "Transaction decoded"
 
 **Blockchain State:**
+
 - "Latest block", "Current block number", "Block height"
 - "Chain state", "Blockchain info"
 
 **⚠️ NOT for:**
-- Wallet transaction history → Use `web3-wallet-api` with `/:address`
-- Token transfers → Use `web3-wallet-api` with `/:address/erc20/transfers` or `web3-token-api`
-- NFT transfers → Use `web3-wallet-api` with `/:address/nft/transfers`
+
+- Wallet transaction history → Use `web3-wallet-api` with wallet
+- Token transfers → Use `web3-wallet-api` with `/wallets/:address/history` or `web3-token-api`
+- NFT transfers → Use `web3-wallet-api` with `/wallets/:address/history`
 - Solana blocks/transactions → Not supported (EVM only)
 
 ## Common Pitfalls
 
 ### Confusion: Transaction by Hash vs Wallet Transactions
+
 - **Specific transaction:** Use this skill (`web3-blockchain-api`) with `/transaction/:transactionHash`
 - **Wallet transaction history:** Use `web3-wallet-api` with `/:address`
 
 ### Confusion: Block Data vs Date to Block
+
 - **Get block by number/hash:** Use this skill (`web3-blockchain-api`) with `/block/:blockNumberOrHash`
 - **Find block by date:** Use this skill (`web3-blockchain-api`) with `/dateToBlock`
 
 ### Confusion: Transaction vs Decoded Transaction
+
 - **Raw transaction data:** Use this skill (`web3-blockchain-api`) with `/transaction/:transactionHash`
 - **Decoded with method names:** Use this skill (`web3-blockchain-api`) with `/transaction/:transactionHash/verbose`
 
 ### EVM Only Limitation
+
 - **This skill is EVM only** - No Solana block/transaction support
 - Use Solana RPC providers for Solana blockchain data
 

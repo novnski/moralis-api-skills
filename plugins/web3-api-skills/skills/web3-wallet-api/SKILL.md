@@ -4,9 +4,9 @@ description: Query wallet data including balances, transactions, NFTs, DeFi posi
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
 metadata:
-  version: "1.0.0"
-  author: web3-skills
-  tags: [web3, blockchain, wallet, crypto, defi, evm, solana]
+    version: "1.0.0"
+    author: web3-skills
+    tags: [web3, blockchain, wallet, crypto, defi, evm, solana]
 ---
 
 # Web3 Wallet API
@@ -18,27 +18,33 @@ Query wallet data for both EVM chains and Solana with automatic blockchain detec
 Use this skill when the user asks about:
 
 **Wallet Basics:**
+
 - "What's the balance?", "How much ETH?", "What's the wallet balance?"
 - "What tokens does this wallet hold?", "Show me the tokens"
 - "What NFTs does this wallet own?", "NFT collection"
 
 **Transaction History:**
+
 - "Show transaction history", "Transaction list", "Recent activity"
+- "Complete history", "All activity", "Everything this wallet has done"
 - "Token transfers", "Tokens sent/received"
 - "NFT transfers", "When were NFTs transferred"
 
 **DeFi & Advanced:**
+
 - "DeFi positions", "Liquidity positions", "Staking", "Yield farming"
 - "Net worth", "Total portfolio value", "What's it worth across all chains?"
 - "Token swaps", "DEX trades", "Swap history"
 - "Token approvals", "What contracts are approved?"
 
 **Wallet Analysis:**
+
 - "Wallet stats", "Activity statistics"
 - "Profitability", "PnL", "Gains and losses"
 - "Active chains", "Which networks have activity"
 
 **⚠️ NOT for:**
+
 - Individual token prices → Use `web3-price-api` or `web3-token-api`
 - Token metadata/contract info → Use `web3-token-api`
 - NFT metadata/collections → Use `web3-nft-api`
@@ -47,15 +53,18 @@ Use this skill when the user asks about:
 ## Common Pitfalls
 
 ### ❌ Wrong: `/wallets/:address/balance`
+
 ### ✅ Correct: `/:address/balance`
 
 Native balance uses `/:address/balance`, NOT `/wallets/:address/balance`. Most other wallet endpoints use the `/wallets/:address/*` pattern, but native balance is different.
 
 **Quick Reference:**
+
 - Native balance (ETH/BNB/MATIC): `/:address/balance`
 - Tokens with prices: `/wallets/:address/tokens`
 - NFTs: `/:address/nft`
 - DeFi: `/wallets/:address/defi/*`
+- Wallet history (all activity): `/wallets/:address/history`
 
 ---
 
@@ -64,6 +73,7 @@ Native balance uses `/:address/balance`, NOT `/wallets/:address/balance`. Most o
 This skill can be installed in different locations. Always use `$SKILL_DIR` to reference the skill directory:
 
 **Installation paths:**
+
 - Plugin: `~/.claude/plugins/marketplaces/moralis-skills/skills/web3-wallet-api`
 - Global: `~/.claude/skills/web3-wallet-api`
 - Project: `<project>/.claude/skills/web3-wallet-api`
@@ -79,6 +89,7 @@ First time setup (one time):
 ## How It Works
 
 The skill automatically detects the blockchain:
+
 - **EVM addresses** start with `0x` and are 42 characters
 - **Solana addresses** are base58 encoded (32-44 characters, no `0x` prefix)
 
@@ -87,6 +98,7 @@ The skill automatically detects the blockchain:
 ### Get Wallet Balance (Token-Efficient)
 
 **EVM (auto-detected, defaults to Ethereum):**
+
 ```bash
 cd $SKILL_DIR
 node -e "const { q } = require('./query');
@@ -97,6 +109,7 @@ q('/:address/balance', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' }
 ```
 
 **Solana (auto-detected):**
+
 ```bash
 cd $SKILL_DIR
 node -e "const { q } = require('./query');
@@ -107,6 +120,7 @@ q('/:network/:address/balance', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0
 ```
 
 **With specific chain:**
+
 ```bash
 cd $SKILL_DIR
 node -e "const { q } = require('./query');
@@ -119,6 +133,7 @@ q('/:address/balance', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045', 
 ### Get Token Balances
 
 **EVM:**
+
 ```bash
 cd $SKILL_DIR
 node -e "const { q } = require('./query');
@@ -129,6 +144,7 @@ q('/wallets/:address/tokens', { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA9
 ```
 
 **Solana (SPL tokens):**
+
 ```bash
 cd $SKILL_DIR
 node -e "const { q } = require('./query');
@@ -138,47 +154,37 @@ q('/:network/:address/tokens', { address: '742d35Cc6634C0532925a3b844Bc9e7595f0b
 "
 ```
 
-### Query with Date Ranges
+### Get Full Wallet History
 
-**Query transactions from specific date:**
+**All activity (ERC20 + NFT + internal + native):**
+
 ```bash
 cd $SKILL_DIR
 node -e "const { q } = require('./query');
-q('/:address/erc20/transfers', {
+q('/wallets/:address/history', {
   address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-  fromDate: '2024-01-01'
+  params: { limit: 100 }
 })
-  .then(r => console.log('Transfers since 2024-01-01:', r.result.length))
+  .then(r => console.log('History items:', r.result.length))
   .catch(console.error);
 "
 ```
 
-**Query with relative time ("2 hours ago"):**
+**Pagination with cursor:**
+
 ```bash
 cd $SKILL_DIR
 node -e "const { q } = require('./query');
-q('/:address/erc20/transfers', {
+q('/wallets/:address/history', {
   address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-  toDate: '2 hours ago'
+  params: { limit: 100, cursor: null }
 })
-  .then(r => console.log('Transfers in last 2 hours:', r.result.length))
+  .then(r => console.log('Page 1:', r.result.length, 'Cursor:', r.cursor))
   .catch(console.error);
 "
 ```
 
-**Date range:**
-```bash
-cd $SKILL_DIR
-node -e "const { q } = require('./query');
-q('/:address/erc20/transfers', {
-  address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-  fromDate: '2024-01-01',
-  toDate: '2024-01-31'
-})
-  .then(r => console.log('Jan 2024 transfers:', r.result.length))
-  .catch(console.error);
-"
-```
+**Use this instead of individual ERC20/NFT transfer endpoints when you need the full activity feed.**
 
 ### Get Full Portfolio (Solana only)
 
@@ -194,6 +200,7 @@ q('/:network/:address/portfolio', { address: '742d35Cc6634C0532925a3b844Bc9e7595
 ### Get NFTs
 
 **EVM:**
+
 ```bash
 cd $SKILL_DIR
 node -e "const { q } = require('./query');
@@ -207,6 +214,7 @@ q('/:address/nft', {
 ```
 
 **Solana:**
+
 ```bash
 cd $SKILL_DIR
 node -e "const { q } = require('./query');
@@ -237,10 +245,12 @@ q('/wallets/:address/swaps', {
 Convert dates to block numbers automatically when querying:
 
 **Supported date formats:**
+
 - ISO dates: `'2024-01-01'` or `'2024-01-01T00:00:00Z'`
 - Relative time: `'2 hours ago'`, `'1 day ago'`, `'1 week ago'`
 
 **Usage:**
+
 ```bash
 cd $SKILL_DIR
 node -e "const { q, dateToBlock } = require('./query');
@@ -261,17 +271,18 @@ dateToBlock('2 hours ago')
 
 Chain names are automatically converted to hex IDs to save tokens:
 
-| Chain | Hex ID |
-|-------|--------|
-| Ethereum (eth) | `0x1` |
-| Polygon | `0x89` |
-| BSC | `0x38` |
-| Arbitrum | `0xa4b1` |
-| Optimism | `0xa` |
-| Base | `0x2105` |
-| Avalanche | `0xa86a` |
+| Chain          | Hex ID   |
+| -------------- | -------- |
+| Ethereum (eth) | `0x1`    |
+| Polygon        | `0x89`   |
+| BSC            | `0x38`   |
+| Arbitrum       | `0xa4b1` |
+| Optimism       | `0xa`    |
+| Base           | `0x2105` |
+| Avalanche      | `0xa86a` |
 
 **Use chain names, hex IDs are automatic:**
+
 ```bash
 q('/:address/balance', { address: '0x...', chain: 'polygon' })  // Uses 0x89
 ```
@@ -328,8 +339,8 @@ All responses return JSON:
 
 ```json
 {
-  "balance": "1000000000000000000",
-  "balance_formatted": "1.0 ETH"
+    "balance": "1000000000000000000",
+    "balance_formatted": "1.0 ETH"
 }
 ```
 
@@ -338,17 +349,21 @@ All responses return JSON:
 Common errors and solutions:
 
 **"API key not found"**
+
 - Run `/web3-api-key` to set up your API key
 
 **"API Error 401"**
+
 - Invalid API key, check your key at https://admin.moralis.io
 
 **"API Error 400"**
+
 - Invalid address format or parameters
 
 ## Troubleshooting
 
 **Check if skill is working:**
+
 ```bash
 cd $SKILL_DIR
 cat .env  # Should show MORALIS_API_KEY=your_key

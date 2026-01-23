@@ -12,9 +12,7 @@
 | "Who owns these NFTs?" | `/nft/:address/owners` | Current owners |
 | "NFT trades/sales?" | `/nft/:address/trades` | Trade history |
 | "NFT traits?" | `/nft/:address/traits` | Collection traits |
-| "Floor price?" | `/nft/:address/lowestprice` | Lowest price |
-| "Search NFTs?" | `/nft/search` | By name |
-| "Trending collections?" | `/nft/collections/trending` | Top collections |
+| "Floor price?" | `/nft/:address/floor-price` | Floor price |
 | "Wallet NFT collections?" | `/:address/nft/collections` | By wallet |
 
 ## Key Endpoint Patterns
@@ -44,11 +42,12 @@
 - **Use this endpoint when:** User asks "collection transfers", "all transfers for this NFT", "transfer history"
 - **Params:** `limit`, `cursor`, `from`, `to`
 
-## Get NFT Transfers by Wallet
-- **Endpoint:** `GET /:address/nft/transfers`
-- **Description:** Get NFT transfers for a wallet
-- **Use this endpoint when:** User asks "wallet NFT transfers", "NFTs sent/received by wallet"
-- **Params:** `limit`, `cursor`, `from`, `to`
+## Wallet-Level Transfers
+
+For wallet activity that includes NFT transfers, use the unified wallet history endpoint:
+
+- **Endpoint:** `GET /wallets/:address/history`
+- **Use this endpoint when:** User asks "wallet NFT transfers", "NFTs sent/received by wallet", "wallet activity"
 
 ## Get NFT Owners
 - **Endpoint:** `GET /nft/:address/owners`
@@ -74,29 +73,11 @@
 - **Use this endpoint when:** User asks "wallet NFT collections", "what collections does this wallet own"
 - **Params:** `limit`, `cursor`
 
-## Get NFT Lowest Price
-- **Endpoint:** `GET /nft/:address/lowestprice`
-- **Description:** Get lowest price/floor for an NFT collection
+## Get NFT Floor Price
+- **Endpoint:** `GET /nft/:address/floor-price`
+- **Description:** Get floor price for an NFT collection
 - **Use this endpoint when:** User asks "floor price", "lowest price", "current floor", "cheapest NFT"
-- **Params:** None
-
-## Search NFTs
-- **Endpoint:** `GET /nft/search`
-- **Description:** Search for NFT collections
-- **Use this endpoint when:** User asks "search NFTs", "find NFT collection", "look up NFTs"
-- **Params:** `q`, `chain`, `limit`
-
-## Get Top NFT Collections
-- **Endpoint:** `GET /nft/collections/trending`
-- **Description:** Get trending NFT collections
-- **Use this endpoint when:** User asks "trending NFTs", "top collections", "hot NFTs"
 - **Params:** `chain`
-
-## Get NFT Metadata from URI
-- **Endpoint:** `GET /nft/resolve`
-- **Description:** Resolve and fetch NFT metadata from URI
-- **Use this endpoint when:** User asks "resolve metadata", "fetch from URI", "get metadata from IPFS"
-- **Params:** `uri`
 
 ## Get NFTs by Wallet
 - **Endpoint:** `GET /:address/nft`
@@ -105,7 +86,7 @@
 - **Params:** `limit`, `cursor`, `format`
 
 ## Get Multiple NFTs
-- **Endpoint:** `GET /nft/getMultiple`
+- **Endpoint:** `GET /nft/getMultipleNFTs`
 - **Description:** Get metadata for multiple NFTs
 - **Use this endpoint when:** User asks "multiple NFTs", "get these NFTs", "batch NFT metadata"
 - **Params:** `tokens`, `format`

@@ -55,7 +55,7 @@ Use this skill when the user asks about:
 
 ### Confusion: Token Transfers vs Wallet Transactions
 - **Transfers for a specific token:** Use this skill (`web3-token-api`) with `/erc20/:address/transfers`
-- **All token transfers to/from a wallet:** Use `web3-wallet-api` with `/:address/erc20/transfers`
+- **All token transfers to/from a wallet:** Use `web3-wallet-api` with `/wallets/:address/history`
 
 ### Confusion: Token Owners vs Wallet Holdings
 - **Who owns token X:** Use this skill (`web3-token-api`) with `/erc20/:address/owners`

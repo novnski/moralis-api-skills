@@ -11,15 +11,13 @@
 | "Transaction [hash]?" | `/transaction/:transactionHash` | TX details |
 | "Decoded transaction?" | `/transaction/:transactionHash/verbose` | Method calls |
 | "Latest block?" | `/latestBlockNumber/:chain` | Block height |
-| "Internal transactions?" | `/transaction/:transactionHash/internal-transactions` | Internal TXs |
-| "Contract events?" | `/:address/events` | Logs/events |
+| "Internal transactions?" | `/transaction/:transactionHash` | Use `include=internal_transactions` |
 
 ## Key Endpoint Patterns
 
 - **Block data:** `/block/:blockNumberOrHash` (by number or hash)
 - **Transaction data:** `/transaction/:transactionHash*` (raw + decoded)
 - **Date conversion:** `/dateToBlock` (find block by date)
-- **Contract events:** `/:address/events` (logs/emitted events)
 - **Decoded data:** Use `/verbose` endpoints for human-readable output
 
 ---
@@ -55,13 +53,8 @@
 - **Params:** `chain`
 
 ## Get Internal Transactions
-- **Endpoint:** `GET /transaction/:transactionHash/internal-transactions`
-- **Description:** Get internal transactions
+- **Endpoint:** `GET /transaction/:transactionHash`
+- **Description:** Get transaction details including internal transactions
 - **Use this endpoint when:** User asks "internal transactions", "internal TXs", "contract calls within transaction"
-- **Params:** `chain`
+- **Params:** `chain`, `include=internal_transactions`
 
-## Get Contract Events
-- **Endpoint:** `GET /:address/events`
-- **Description:** Get contract events/logs
-- **Use this endpoint when:** User asks "contract events", "logs", "emitted events", "contract logs"
-- **Params:** `chain`, `from`, `to`, `limit`

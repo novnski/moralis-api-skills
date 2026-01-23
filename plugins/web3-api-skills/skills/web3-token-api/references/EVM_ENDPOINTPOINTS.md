@@ -16,7 +16,7 @@
 | "Search for tokens" | `/erc20/search` | By name/symbol |
 | "Trending tokens?" | `/trending/tokens` | Social sentiment |
 | "Token stats?" | `/erc20/:address/stats` | Market statistics |
-| "Token balance?" | `/erc20/:address/balanceOf` | For specific address |
+| "Token balance?" | `/wallets/:address/tokens` | Token balances for wallet |
 
 ## Key Endpoint Patterns
 
@@ -103,10 +103,9 @@
 - **Use this endpoint when:** User asks "total supply", "circulating supply", "max supply"
 
 ## Get Token Balance
-- **Endpoint:** `GET /erc20/:address/balanceOf`
-- **Description:** Get token balance for an address
-- **Use this endpoint when:** User asks "token balance", "how many tokens does X have", "check balance"
-- **Params:** `address`
+- **Endpoint:** `GET /wallets/:address/tokens`
+- **Description:** Get token balances for a wallet
+- **Use this endpoint when:** User asks "token balance", "how many tokens does this wallet have", "check wallet token balances"
 
 ## Get Token Stats
 - **Endpoint:** `GET /erc20/:address/stats`
