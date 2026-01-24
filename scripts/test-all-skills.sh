@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# Test all skills for basic functionality
-
-echo "Testing Moralis API Skills..."
+echo "Testing Moralis API Skills v3.0.0..."
 echo ""
 
 # Check API key (look in project root or .claude directory)
@@ -17,26 +15,18 @@ fi
 
 echo ""
 
-# Test each skill loads
-# Updated v2.0.0 - Consolidated skills (analytics/score/sniper/premium utils merged into token-api)
-SKILLS=("moralis-wallet-api" "moralis-nft-api" "moralis-token-api" "moralis-defi-api" "moralis-entity-api" "moralis-price-api" "moralis-blockchain-api" "moralis-streams-api" "moralis-api-key")
+SKILLS_DIR="./skills"
+SKILLS=("moralis-data-api" "moralis-streams-api")
 
 for skill in "${SKILLS[@]}"; do
-  if [ -d "skills/$skill" ]; then
-    if [ -f "skills/$skill/query.js" ]; then
-      echo "✓ $skill - query.js exists"
-    else
-      echo "✗ $skill - query.js missing"
-    fi
-    if [ -f "skills/$skill/SKILL.md" ]; then
-      echo "✓ $skill - SKILL.md exists"
-    else
-      echo "✗ $skill - SKILL.md missing"
-    fi
+  echo "Testing $skill..."
+  if [ -f "$SKILLS_DIR/$skill/SKILL.md" ] && [ -f "$SKILLS_DIR/$skill/query.js" ]; then
+    echo "✓ $skill OK"
   else
-    echo "✗ $skill - directory missing"
+    echo "✗ $skill FAILED"
+    exit 1
   fi
 done
 
 echo ""
-echo "Test complete!"
+echo "All skills OK!"
