@@ -58,6 +58,20 @@ class TimeoutError extends Error {
   }
 }
 
+// Performance and configuration constants
+const REQUEST_TIMEOUT_MS = 30_000;
+const MAX_PAGES = 1000;
+const DEFAULT_CONCURRENCY = 5;
+const MAX_RESPONSE_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_BODY_SIZE = 1024 * 1024; // 1MB
+const EXPONENTIAL_BACKOFF_MAX_DELAY = 5000;
+
+// API base URLs
+const API_BASE_URLS = {
+  evm: "https://deep-index.moralis.io/api/v2.2",
+  solana: "https://solana-gateway.moralis.io",
+};
+
 /**
  * Web3 Skills Unified Query Client
  * Optimized for all Web3 Moralis API endpoints across all skills
@@ -156,85 +170,30 @@ function chainToHex(chain) {
 }
 
 // Set of all supported EVM chain IDs (hex format)
-const EVM_SUPPORTED_CHAIN_IDS = new Set([
-  "0x1", // Ethereum
-  "0x5", // Goerli
-  "0xaa36a7", // Sepolia
-  "0x89", // Polygon
-  "0x13881", // Mumbai
-  "0x38", // BSC
-  "0x61", // BSC Testnet
-  "0xa86a", // Avalanche
-  "0xa869", // Fuji
-  "0xfa", // Fantom
-  "0xa4b1", // Arbitrum
-  "0x66eee", // Arbitrum Testnet
-  "0xa", // Optimism
-  "0x45", // Optimism Testnet
-  "0x2105", // Base
-  "0x14a34", // Base Testnet
-  "0xa4ec", // Celo
-  "0x64", // Gnosis
-  "0x504", // Moonbeam
-  "0x505", // Moonriver
-  "0x19", // Cronos
-  "0x4e454152", // Aurora
-  "0x144", // Polygon zkEVM
-  "0x13882", // Amoy
-  "0x770e", // Linea
-  "0xe708", // Linea Testnet
-  "0x82750", // Scroll
-  "0x8274f", // Scroll Testnet
-  "0x81457", // Blast
-  "0x24c931", // Blast Testnet
-  "0xa9b4", // Manta
-  "0x5e02", // Manta Testnet
-  "0x50e8", // Taiko
-  "0x50e3", // Taiko Testnet
-  "0x1e12", // World
-  "0x1e14", // World Testnet
-  // New chains (2025)
-  "0x54", // Flow
-  "0x545", // Flow Testnet
-  "0x7e", // Ronin
-  "0x7ef", // Ronin Testnet
-  "0x94", // Lisk
-  "0x945", // Lisk Testnet
-  "0x82", // Sei
-  "0x826", // Sei Testnet
-  "0x8f", // Monad
-]);
+// Derived programmatically from CHAIN_HEX_MAP to avoid duplication
+const EVM_SUPPORTED_CHAIN_IDS = new Set(
+  Object.values(CHAIN_HEX_MAP).filter((chainId) => chainId.startsWith("0x")),
+);
 
 // Mainnet-only chains (for endpoints that don't support testnets)
-const EVM_MAINNET_CHAIN_IDS = new Set([
-  "0x1", // Ethereum
-  "0x89", // Polygon
-  "0x38", // BSC
-  "0xa86a", // Avalanche
-  "0xfa", // Fantom
-  "0xa4b1", // Arbitrum
-  "0xa", // Optimism
-  "0x2105", // Base
-  "0xa4ec", // Celo
-  "0x64", // Gnosis
-  "0x504", // Moonbeam
-  "0x505", // Moonriver
-  "0x19", // Cronos
-  "0x4e454152", // Aurora
-  "0x144", // Polygon zkEVM
-  "0x770e", // Linea
-  "0x82750", // Scroll
-  "0x81457", // Blast
-  "0xa9b4", // Manta
-  "0x50e8", // Taiko
-  "0x1e12", // World
-  // New chains (2025)
-  "0x54", // Flow
-  "0x7e", // Ronin
-  "0x94", // Lisk
-  "0x82", // Sei
-  "0x8f", // Monad
-]);
+// Derived programmatically from EVM_SUPPORTED_CHAIN_IDS by filtering out testnets
+const EVM_MAINNET_CHAIN_IDS = new Set(
+  [...EVM_SUPPORTED_CHAIN_IDS].filter((chainId) => {
+    const keys = Object.keys(CHAIN_HEX_MAP);
+    const values = Object.values(CHAIN_HEX_MAP);
+    const idx = values.indexOf(chainId);
+    if (idx === -1) return true;
+    const key = keys[idx];
+    return (
+      !key.includes("testnet") &&
+      !key.includes("fuji") &&
+      !key.includes("mumbai") &&
+      !key.includes("amoy") &&
+      !key.includes("goerli") &&
+      !key.includes("sepolia")
+    );
+  }),
+);
 
 // Chains with token price support
 const EVM_TOKEN_PRICE_CHAIN_IDS = new Set([
@@ -275,7 +234,7 @@ function assertEvmChainSupported(chainHex, endpoint, allowedChains, reason) {
     reason ||
     `Unsupported chain "${chainHex}" for endpoint ${endpoint}. ` +
       `Supported chain IDs: ${[...allowedChains].join(", ")}`;
-  throw new Error(message);
+  throw new ValidationError(message);
 }
 
 /**
@@ -436,7 +395,7 @@ function httpsRequest(fullUrl, headers, method = "GET", body = null) {
       method: method,
       headers: headers,
       // Fix #23: Add request timeout (30 seconds)
-      timeout: 30000,
+      timeout: REQUEST_TIMEOUT_MS,
     };
 
     // Add Content-Length and Content-Type for requests with body
@@ -449,14 +408,14 @@ function httpsRequest(fullUrl, headers, method = "GET", body = null) {
     }
 
     const req = https.request(options, (res) => {
-      let data = "";
-
+      let chunks = [];
       res.on("data", (chunk) => {
-        data += chunk;
+        chunks.push(chunk);
       });
 
       res.on("end", () => {
         try {
+          const data = Buffer.concat(chunks).toString("utf8");
           const parsed = JSON.parse(data);
           if (res.statusCode >= 400) {
             reject(
@@ -543,19 +502,16 @@ async function dateToBlock(date, chain = "eth", skillDir = __dirname) {
         url,
         { headers: { "x-api-key": apiKey, Accept: "application/json" } },
         (res) => {
-          let data = "";
+          let chunks = [];
           res.on("data", (chunk) => {
-            data += chunk;
+            chunks.push(chunk);
           });
           res.on("end", () => {
             try {
+              const data = Buffer.concat(chunks).toString("utf8");
               const parsed = JSON.parse(data);
               if (res.statusCode >= 400) {
-                reject(
-                  new Error(
-                    `API Error ${res.statusCode}: ${JSON.stringify(parsed)}`,
-                  ),
-                );
+                reject(new APIError(res.statusCode, parsed));
               } else {
                 resolve(parsed.block);
               }
@@ -596,19 +552,16 @@ async function searchToken(queryParam, chains, skillDir = __dirname) {
         url,
         { headers: { "x-api-key": apiKey, Accept: "application/json" } },
         (res) => {
-          let data = "";
+          let chunks = [];
           res.on("data", (chunk) => {
-            data += chunk;
+            chunks.push(chunk);
           });
           res.on("end", () => {
             try {
+              const data = Buffer.concat(chunks).toString("utf8");
               const parsed = JSON.parse(data);
               if (res.statusCode >= 400) {
-                reject(
-                  new Error(
-                    `API Error ${res.statusCode}: ${JSON.stringify(parsed)}`,
-                  ),
-                );
+                reject(new APIError(res.statusCode, parsed));
               } else {
                 resolve(parsed);
               }
@@ -693,9 +646,7 @@ async function query(endpoint, options = {}) {
   // Use custom baseURL if provided (e.g., Streams API)
   const apiBaseURL =
     baseURL ||
-    (blockchain.type === "evm"
-      ? "https://deep-index.moralis.io/api/v2.2"
-      : "https://solana-gateway.moralis.io");
+    (blockchain.type === "evm" ? API_BASE_URLS.evm : API_BASE_URLS.solana);
 
   if (blockchain.type === "evm" && !baseURL) {
     const chainHex = blockchain.chain;
@@ -829,8 +780,8 @@ async function paginate(endpoint, options = {}, maxResults = 0) {
     }
 
     // Safety limit to prevent infinite loops
-    if (page > 1000) {
-      console.warn("Pagination exceeded 1000 pages, stopping");
+    if (page > MAX_PAGES) {
+      console.warn("Pagination exceeded MAX_PAGES pages, stopping");
       break;
     }
   } while (cursor);
@@ -915,7 +866,12 @@ function createVerifiedFilter(options = {}) {
  *   { chain: 'eth' }
  * );
  */
-async function batchQuery(endpoint, items, options = {}, concurrency = 5) {
+async function batchQuery(
+  endpoint,
+  items,
+  options = {},
+  concurrency = DEFAULT_CONCURRENCY,
+) {
   if (!Array.isArray(items) || items.length === 0) {
     return [];
   }
@@ -952,7 +908,7 @@ async function batchQuery(endpoint, items, options = {}, concurrency = 5) {
               break;
             }
             // Exponential backoff: 100ms -> 200ms -> 400ms -> 800ms (max 5s)
-            delay = Math.min(delay * 2, 5000);
+            delay = Math.min(delay * 2, EXPONENTIAL_BACKOFF_MAX_DELAY);
             await new Promise((resolve) => setTimeout(resolve, delay));
           } else {
             // Non-rate-limit error, fail immediately
