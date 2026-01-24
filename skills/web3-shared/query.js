@@ -3,6 +3,62 @@ const fs = require("fs");
 const path = require("path");
 
 /**
+ * Debug logging utilities
+ */
+const DEBUG = process.env.WEB3_DEBUG === "true";
+
+function debugLog(message, data) {
+  if (DEBUG) {
+    console.error(`[web3-shared] ${message}`, data);
+  }
+}
+
+/**
+ * Metrics collection
+ */
+const metrics = {
+  requests: 0,
+  errors: 0,
+  timeouts: 0,
+  rateLimits: 0,
+};
+
+/**
+ * Get current metrics snapshot
+ * @returns {object} Copy of current metrics
+ */
+function getMetrics() {
+  return { ...metrics };
+}
+
+/**
+ * Custom error classes
+ */
+
+class ValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ValidationError";
+  }
+}
+
+class APIError extends Error {
+  constructor(statusCode, response) {
+    super(`API Error ${statusCode}: ${JSON.stringify(response)}`);
+    this.name = "APIError";
+    this.statusCode = statusCode;
+    this.response = response;
+  }
+}
+
+class TimeoutError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "TimeoutError";
+  }
+}
+
+/**
  * Web3 Skills Unified Query Client
  * Optimized for all Web3 Moralis API endpoints across all skills
  *
@@ -939,4 +995,10 @@ module.exports = {
   createSpamFilter, // Spam filtering helper
   createVerifiedFilter, // Verified contract filtering helper
   batchQuery, // Batch request helper for multiple items
+  // Error classes
+  ValidationError,
+  APIError,
+  TimeoutError,
+  // Utilities
+  getMetrics,
 };
