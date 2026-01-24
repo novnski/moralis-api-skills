@@ -4,9 +4,18 @@ description: Query DEX pair analytics, sniping detection, and early buyer identi
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   author: web3-skills
   tags: [web3, blockchain, dex, sniper, trading, analytics, evm]
+  context:
+    fork: false
+    agent: ""
+  allowed-tools:
+    - Bash
+    - Read
+  invocation:
+    disable-model-invocation: false
+    user-invocable: true
 ---
 
 # Web3 Sniper API

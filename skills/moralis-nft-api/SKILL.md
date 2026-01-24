@@ -4,9 +4,18 @@ description: Query NFT data including metadata, traits, transfers, trades, floor
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   author: web3-skills
   tags: [web3, blockchain, nft, metadata, traits, rarity, evm, solana]
+  context:
+    fork: false
+    agent: ""
+  allowed-tools:
+    - Bash
+    - Read
+  invocation:
+    disable-model-invocation: false
+    user-invocable: true
 ---
 
 # Web3 NFT API

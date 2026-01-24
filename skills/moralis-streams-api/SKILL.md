@@ -5,9 +5,18 @@ disable-model-invocation: true
 license: MIT
 compatibility: Requires Node.js (built-in modules only)
 metadata:
-    version: "1.0.0"
+    version: "1.1.0"
     author: noviulian
     tags: [streams, webhooks, real-time, events, monitoring, moralis]
+    context:
+        fork: false
+        agent: ""
+    allowed-tools:
+        - Bash
+        - Read
+    invocation:
+        disable-model-invocation: true
+        user-invocable: true
 ---
 
 # Streams API

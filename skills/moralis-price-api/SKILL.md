@@ -4,9 +4,18 @@ description: Query token and NFT prices for both EVM chains and Solana. Get curr
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed). Solana API is more limited than EVM.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   author: web3-skills
   tags: [web3, blockchain, price, market, trading, evm, solana]
+  context:
+    fork: false
+    agent: ""
+  allowed-tools:
+    - Bash
+    - Read
+  invocation:
+    disable-model-invocation: false
+    user-invocable: true
 ---
 
 # Web3 Price API

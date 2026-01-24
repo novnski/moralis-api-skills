@@ -4,9 +4,18 @@ description: Query blockchain data including blocks, transactions, and decoded t
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed). EVM chains only - not supported on Solana.
 metadata:
-    version: "1.0.0"
+    version: "1.1.0"
     author: web3-skills
     tags: [web3, blockchain, block, transaction, evm]
+    context:
+        fork: false
+        agent: ""
+    allowed-tools:
+        - Bash
+        - Read
+    invocation:
+        disable-model-invocation: false
+        user-invocable: true
 ---
 
 # Web3 Blockchain API (EVM Only)

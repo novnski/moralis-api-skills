@@ -1,12 +1,23 @@
 ---
 name: moralis-api-key
 description: Set or update the Moralis API key in a shared .env file for all Moralis skills. Use when user provides an API key or asks to configure credentials.
+disable-model-invocation: true
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
 metadata:
-    version: "1.0.0"
+    version: "1.1.0"
     author: moralis-skills
     tags: [moralis, api-key, configuration, setup, env]
+    context:
+        fork: false
+        agent: ""
+    allowed-tools:
+        - Bash
+        - Read
+        - Write
+    invocation:
+        disable-model-invocation: true
+        user-invocable: true
 ---
 
 # Moralis API Key Manager

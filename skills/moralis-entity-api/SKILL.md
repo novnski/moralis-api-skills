@@ -4,9 +4,18 @@ description: Search and query labeled entities including exchanges, funds, proto
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed). EVM chains only - not supported on Solana.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   author: web3-skills
   tags: [web3, blockchain, entity, labels, exchange, funds, evm]
+  context:
+    fork: false
+    agent: ""
+  allowed-tools:
+    - Bash
+    - Read
+  invocation:
+    disable-model-invocation: false
+    user-invocable: true
 ---
 
 # Web3 Entity API (EVM Only)

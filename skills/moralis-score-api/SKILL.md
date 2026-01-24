@@ -4,9 +4,18 @@ description: Query token security scores, spam detection, and quality assessment
 license: MIT
 compatibility: Requires Node.js (built-in modules only, no npm install needed)
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   author: web3-skills
   tags: [web3, blockchain, security, score, spam, token-safety, evm]
+  context:
+    fork: false
+    agent: ""
+  allowed-tools:
+    - Bash
+    - Read
+  invocation:
+    disable-model-invocation: false
+    user-invocable: true
 ---
 
 # Web3 Score API
