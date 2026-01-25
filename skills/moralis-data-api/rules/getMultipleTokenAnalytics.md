@@ -16,6 +16,9 @@ POST
 
 ## Body
 
+| Name | Type | Required | Description | Example |
+|------|------|----------|-------------|----------|
+| tokens | array | No | The tokens to be fetched | \`[object Object],[object Object]\` |
 
 ## Example (curl)
 
@@ -24,5 +27,16 @@ curl -X POST "https://deep-index.moralis.io/api/v2.2/tokens/analytics" \
   -H "accept: application/json" \
   -H "X-API-Key: $MORALIS_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{
+  "tokens": [
+    {
+      "chain": "0x1",
+      "tokenAddress": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+    },
+    {
+      "chain": "solana",
+      "tokenAddress": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+    }
+  ]
+}'
 ```

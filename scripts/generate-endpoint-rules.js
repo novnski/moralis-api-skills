@@ -145,8 +145,12 @@ function buildBodyExample(bodyParam) {
 
   // Simple object builder
   const obj = {};
-  if (Array.isArray(bodyParam)) {
-    for (const field of bodyParam) {
+  if (
+    typeof bodyParam === "object" &&
+    bodyParam.fields &&
+    Array.isArray(bodyParam.fields)
+  ) {
+    for (const field of bodyParam.fields) {
       if (field.example !== undefined) {
         obj[field.name] = field.example;
       }
@@ -320,11 +324,15 @@ function buildBodySection(endpoint) {
         (field.description || "-") +
         " |\n";
     }
-  } else if (typeof bodyParam === "object" && Array.isArray(bodyParam)) {
+  } else if (
+    typeof bodyParam === "object" &&
+    bodyParam.fields &&
+    Array.isArray(bodyParam.fields)
+  ) {
     section += "| Name | Type | Required | Description | Example |\n";
     section += "|------|------|----------|-------------|----------|\n";
 
-    for (const field of bodyParam) {
+    for (const field of bodyParam.fields) {
       const type =
         (field.type || "-") +
         (field.enum ? " (" + field.enum.join(", ") + ")" : "");

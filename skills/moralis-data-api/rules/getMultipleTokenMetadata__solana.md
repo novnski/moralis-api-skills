@@ -22,6 +22,9 @@ POST
 
 ## Body
 
+| Name | Type | Required | Description | Example |
+|------|------|----------|-------------|----------|
+| addresses | array | No | - | \`So11111111111111111111111111111111111111112\` |
 
 ## Example (curl)
 
@@ -30,5 +33,9 @@ curl -X POST "https://solana-gateway.moralis.io/token/mainnet/metadata" \
   -H "accept: application/json" \
   -H "X-API-Key: $MORALIS_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{
+  "addresses": [
+    "So11111111111111111111111111111111111111112"
+  ]
+}'
 ```

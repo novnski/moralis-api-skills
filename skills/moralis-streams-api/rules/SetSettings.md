@@ -16,6 +16,10 @@ POST
 
 ## Body
 
+| Name | Type | Required | Description | Example |
+|------|------|----------|-------------|----------|
+| region | string (us-east-1, us-west-2, eu-central-1, ap-southeast-1) | No | The region from where all the webhooks will be posted for this project | \`string\` |
+| secretKey | string | No | The secret key to validate the webhooks | \`string\` |
 
 ## Example (curl)
 
@@ -24,5 +28,8 @@ curl -X POST "https://api.moralis-streams.com/settings" \
   -H "accept: application/json" \
   -H "X-API-Key: $MORALIS_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{
+  "region": "string",
+  "secretKey": "string"
+}'
 ```

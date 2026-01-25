@@ -22,6 +22,9 @@ POST
 
 ## Body
 
+| Name | Type | Required | Description | Example |
+|------|------|----------|-------------|----------|
+| address | - | No | The address or a list of addresses to be added to the Stream. | \`string\` |
 
 ## Example (curl)
 
@@ -30,5 +33,7 @@ curl -X POST "https://api.moralis-streams.com/streams/evm/:id/address" \
   -H "accept: application/json" \
   -H "X-API-Key: $MORALIS_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{
+  "address": "string"
+}'
 ```

@@ -22,6 +22,11 @@ POST
 
 ## Body
 
+| Name | Type | Required | Description | Example |
+|------|------|----------|-------------|----------|
+| tokens | array | No | The tokens to be fetched (max 25 tokens) | \`[object Object],[object Object],[object Object]\` |
+| normalizeMetadata | boolean | No | Should normalized metadata be returned? | \`-\` |
+| media_items | boolean | No | Should preview media data be returned? | \`-\` |
 
 ## Example (curl)
 
@@ -30,5 +35,22 @@ curl -X POST "https://deep-index.moralis.io/api/v2.2/nft/getMultipleNFTs?chain=e
   -H "accept: application/json" \
   -H "X-API-Key: $MORALIS_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{
+  "tokens": [
+    {
+      "token_address": "0xa4991609c508b6d4fb7156426db0bd49fe298bd8",
+      "token_id": "12"
+    },
+    {
+      "token_address": "0x3c64dc415ebb4690d1df2b6216148c8de6dd29f7",
+      "token_id": "1"
+    },
+    {
+      "token_address": "0x3c64dc415ebb4690d1df2b6216148c8de6dd29f7",
+      "token_id": "200"
+    }
+  ],
+  "normalizeMetadata": false,
+  "media_items": false
+}'
 ```

@@ -22,6 +22,24 @@ POST
 
 ## Body
 
+| Name | Type | Required | Description | Example |
+|------|------|----------|-------------|----------|
+| webhookUrl | string | No | Webhook URL where moralis will send the POST request. | \`string\` |
+| description | string | No | A description for this stream | \`string\` |
+| tag | string | No | A user-provided tag that will be send along the webhook, the user can use this tag to identify the specific stream if multiple streams are present | \`string\` |
+| topic0 | array | No | An Array of topic0's in string-signature format ex: ['FunctionName(address,uint256)'] | \`\` |
+| allAddresses | boolean | No | Include events for all addresses (only applied when abi and topic0 is provided) | \`-\` |
+| includeNativeTxs | boolean | No | Include or not native transactions defaults to false | \`-\` |
+| includeContractLogs | boolean | No | Include or not logs of contract interactions defaults to false | \`-\` |
+| includeInternalTxs | boolean | No | Include or not include internal transactions defaults to false | \`-\` |
+| includeAllTxLogs | boolean | No | Include all logs if atleast one value in tx or log matches stream config | \`-\` |
+| getNativeBalances | array | No | Include native balances for each address in the webhook | \`\` |
+| abi | - | No | - | \`string\` |
+| advancedOptions | - | No | - | \`string\` |
+| chainIds | array | No | The ids of the chains for this stream in hex Ex: ["0x1","0x38"] | \`\` |
+| filterPossibleSpamAddresses | boolean | No | Indicator if it is a demo stream | \`-\` |
+| demo | boolean | No | Filter possible spam addresses | \`-\` |
+| triggers | array | No | triggers | \`\` |
 
 ## Example (curl)
 
@@ -30,5 +48,22 @@ curl -X POST "https://api.moralis-streams.com/streams/evm/:id" \
   -H "accept: application/json" \
   -H "X-API-Key: $MORALIS_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{
+  "webhookUrl": "string",
+  "description": "string",
+  "tag": "string",
+  "topic0": [],
+  "allAddresses": false,
+  "includeNativeTxs": false,
+  "includeContractLogs": false,
+  "includeInternalTxs": false,
+  "includeAllTxLogs": false,
+  "getNativeBalances": [],
+  "abi": "string",
+  "advancedOptions": "string",
+  "chainIds": [],
+  "filterPossibleSpamAddresses": false,
+  "demo": false,
+  "triggers": []
+}'
 ```

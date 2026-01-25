@@ -16,10 +16,10 @@ GET
 
 ## Path Params
 
-| Name    | Type             | Required | Description          | Example                                         |
-| ------- | ---------------- | -------- | -------------------- | ----------------------------------------------- |
-| network | string (mainnet) | Yes      | The network to query | -                                               |
-| address | string           | Yes      | The address to query | \`kXB7FfzdrfZpAZEW3TZcp8a8CwQbsowa6BdfAHZ4gVs\` |
+| Name | Type | Required | Description | Example |
+|------|------|----------|-------------|----------|
+| network | string (mainnet) | Yes | The network to query | - |
+| address | string | Yes | The address to query | \`kXB7FfzdrfZpAZEW3TZcp8a8CwQbsowa6BdfAHZ4gVs\` |
 
 ## Example (curl)
 

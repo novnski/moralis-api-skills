@@ -25,6 +25,9 @@ POST
 
 ## Body
 
+| Name | Type | Required | Description | Example |
+|------|------|----------|-------------|----------|
+| tokens | array | No | The tokens to be fetched | \`[object Object],[object Object],[object Object],[object Object]\` |
 
 ## Example (curl)
 
@@ -33,5 +36,22 @@ curl -X POST "https://deep-index.moralis.io/api/v2.2/erc20/prices?chain=eth&incl
   -H "accept: application/json" \
   -H "X-API-Key: $MORALIS_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{
+  "tokens": [
+    {
+      "token_address": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+    },
+    {
+      "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+    },
+    {
+      "token_address": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
+      "exchange": "uniswapv2",
+      "to_block": "16314545"
+    },
+    {
+      "token_address": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0"
+    }
+  ]
+}'
 ```
