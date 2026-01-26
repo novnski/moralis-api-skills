@@ -16,15 +16,16 @@ POST
 
 ## Path Params
 
-| Name | Type | Required | Description | Example |
-|------|------|----------|-------------|----------|
-| id | string | Yes | The id of the stream to update | - |
+| Name | Type   | Required | Description                    | Example |
+| ---- | ------ | -------- | ------------------------------ | ------- |
+| id   | string | Yes      | The id of the stream to update | -       |
 
 ## Body
 
-| Name | Type | Required | Description | Example |
-|------|------|----------|-------------|----------|
-| status | string (active, paused, error, terminated) | No | The stream status:
+| Name   | Type                                       | Required | Description        | Example |
+| ------ | ------------------------------------------ | -------- | ------------------ | ------- |
+| status | string (active, paused, error, terminated) | No       | The stream status: |
+
 [active] The Stream is healthy and processing blocks
 [paused] The Stream is paused and is not processing blocks
 [error] The Stream has encountered an error and is not processing blocks | \`[object Object]\` |

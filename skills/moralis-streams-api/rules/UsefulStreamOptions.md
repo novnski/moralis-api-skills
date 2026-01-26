@@ -12,11 +12,12 @@ The `includeContractLogs` option includes all contract logs in the webhook.
 
 ```json
 {
-  "includeContractLogs": true
+    "includeContractLogs": true
 }
 ```
 
 **Use cases:**
+
 - Monitoring a specific contract
 - Tracking wallet interactions with contracts
 
@@ -28,7 +29,7 @@ Monitor all internal transactions happening on-chain by setting `includeInternal
 
 ```json
 {
-  "includeInternalTxs": true
+    "includeInternalTxs": true
 }
 ```
 
@@ -40,7 +41,7 @@ Control whether native (ETH, BNB, MATIC, etc.) transactions are included:
 
 ```json
 {
-  "includeNativeTxs": true
+    "includeNativeTxs": true
 }
 ```
 
@@ -50,11 +51,12 @@ When `includeAllTxLogs` is enabled, it will include **all related logs** if any 
 
 ```json
 {
-  "includeAllTxLogs": true
+    "includeAllTxLogs": true
 }
 ```
 
 **Requirements:**
+
 - Must be used together with `includeNativeTxs` or `includeContractLogs`
 - Available on **Moralis Pro Plan & higher**
 
@@ -64,15 +66,16 @@ When `includeAllTxLogs` is enabled, it will include **all related logs** if any 
 
 An array of advanced option objects that allow you to specify additional filters and conditions. Each object has the following **required** fields:
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `topic0` | string | The event signature to listen to (e.g., `Transfer(address,address,uint256)`) |
-| `filter` | object | Custom filter object with conditions data must meet (see [FilterStreams](./FilterStreams.md)) |
-| `includeNativeTxs` | boolean | Whether to include native transactions in addition to contract logs |
+| Field              | Type    | Description                                                                                   |
+| ------------------ | ------- | --------------------------------------------------------------------------------------------- |
+| `topic0`           | string  | The event signature to listen to (e.g., `Transfer(address,address,uint256)`)                  |
+| `filter`           | object  | Custom filter object with conditions data must meet (see [FilterStreams](./FilterStreams.md)) |
+| `includeNativeTxs` | boolean | Whether to include native transactions in addition to contract logs                           |
 
 ### Use Case
 
 Advanced Options are useful when you want to narrow down the data included in the stream to only include specific types of events or transactions. For example:
+
 - Only listen to transfers of a certain amount
 - Filter transfers from a particular address
 - Track specific contract events with value thresholds
@@ -81,22 +84,23 @@ Advanced Options are useful when you want to narrow down the data included in th
 
 ```json
 {
-  "topic0": "Transfer(address,address,uint256)",
-  "filter": {
-    "and": [
-      {
-        "eq": ["from", "0x283af0b28c62c092c9727f1ee09c02ca627eb7f5"]
-      },
-      {
-        "gt": ["amount", "100000000000000000000"]
-      }
-    ]
-  },
-  "includeNativeTxs": false
+    "topic0": "Transfer(address,address,uint256)",
+    "filter": {
+        "and": [
+            {
+                "eq": ["from", "0x283af0b28c62c092c9727f1ee09c02ca627eb7f5"]
+            },
+            {
+                "gt": ["amount", "100000000000000000000"]
+            }
+        ]
+    },
+    "includeNativeTxs": false
 }
 ```
 
 **Explanation:**
+
 - Listening to the ERC20 `Transfer(address,address,uint256)` event
 - Filtering for transfers where `from` equals `0x283af0b28c62c092c9727f1ee09c02ca627eb7f5`
 - Only including transfers where `amount` is greater than 100 tokens (in wei, assuming 18 decimals)
@@ -108,20 +112,20 @@ You can combine multiple options in a single stream configuration:
 
 ```json
 {
-  "webhookUrl": "https://your-server.com/webhook",
-  "includeNativeTxs": true,
-  "includeContractLogs": true,
-  "includeInternalTxs": true,
-  "includeAllTxLogs": true,
-  "advancedOptions": [
-    {
-      "topic0": "Transfer(address,address,uint256)",
-      "filter": {
-        "gt": ["value", "1000000000000000000"]
-      },
-      "includeNativeTxs": false
-    }
-  ]
+    "webhookUrl": "https://your-server.com/webhook",
+    "includeNativeTxs": true,
+    "includeContractLogs": true,
+    "includeInternalTxs": true,
+    "includeAllTxLogs": true,
+    "advancedOptions": [
+        {
+            "topic0": "Transfer(address,address,uint256)",
+            "filter": {
+                "gt": ["value", "1000000000000000000"]
+            },
+            "includeNativeTxs": false
+        }
+    ]
 }
 ```
 
