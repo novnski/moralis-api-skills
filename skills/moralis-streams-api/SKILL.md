@@ -194,45 +194,51 @@ curl -X POST "https://api.moralis-streams.com/streams/evm/<stream_id>/status" \
 
 ---
 
-## Endpoint Categories
+## Endpoint Catalog
+
+Complete list of all 20 Streams API endpoints organized by category.
 
 ### Stream Management
 
+Create, update, delete, and manage streams.
+
 | Endpoint | Description |
 |----------|-------------|
-| [CreateStream](rules/CreateStream.md) | Create new stream (PUT) |
-| [GetStreams](rules/GetStreams.md) | List all streams |
-| [GetStream](rules/GetStream.md) | Get stream details |
-| [UpdateStream](rules/UpdateStream.md) | Update stream (POST) |
+| [AddAddressToStream](rules/AddAddressToStream.md) | Add address to stream |
+| [CreateStream](rules/CreateStream.md) | Create stream |
+| [DeleteAddressFromStream](rules/DeleteAddressFromStream.md) | Delete address from stream |
 | [DeleteStream](rules/DeleteStream.md) | Delete stream |
-| [UpdateStreamStatus](rules/UpdateStreamStatus.md) | Pause/resume stream |
+| [DuplicateStream](rules/DuplicateStream.md) | Duplicate stream |
+| [GetAddresses](rules/GetAddresses.md) | Get addresses by stream |
+| [GetHistory](rules/GetHistory.md) | Get history |
+| [GetLogs](rules/GetLogs.md) | Get logs |
+| [GetSettings](rules/GetSettings.md) | Get project settings |
+| [GetStats](rules/GetStats.md) | Get project stats |
+| [GetStatsByStreamId](rules/GetStatsByStreamId.md) | Get project stats by Stream ID |
+| [GetStream](rules/GetStream.md) | Get a specific evm stream. |
+| [GetStreamBlockDataByNumber](rules/GetStreamBlockDataByNumber.md) | Get webhook data returned on the block number with provided stream config |
+| [GetStreamBlockDataToWebhookByNumber](rules/GetStreamBlockDataToWebhookByNumber.md) | Send webhook based on a specific block number using stream config and addresses. |
+| [GetStreams](rules/GetStreams.md) | Get streams |
+| [ReplaceAddressFromStream](rules/ReplaceAddressFromStream.md) | Replaces address from stream |
+| [UpdateStream](rules/UpdateStream.md) | Update stream |
+| [UpdateStreamStatus](rules/UpdateStreamStatus.md) | Update stream status |
 
-### Address Management
+### Status & Settings
+
+Pause/resume streams and configure settings.
 
 | Endpoint | Description |
 |----------|-------------|
-| [AddAddressToStream](rules/AddAddressToStream.md) | Add addresses |
-| [DeleteAddressFromStream](rules/DeleteAddressFromStream.md) | Remove address |
-| [GetAddresses](rules/GetAddresses.md) | List monitored addresses |
-| [ReplaceAddressFromStream](rules/ReplaceAddressFromStream.md) | Replace address |
+| [SetSettings](rules/SetSettings.md) | Set project settings |
 
 ### History & Analytics
 
-| Endpoint | Description |
-|----------|-------------|
-| [GetHistory](rules/GetHistory.md) | Get webhook history |
-| [GetStats](rules/GetStats.md) | Get project stats |
-| [GetStatsByStreamId](rules/GetStatsByStreamId.md) | Get stream stats |
-| [ReplayHistory](rules/ReplayHistory.md) | Replay past events |
-
-### Settings
+Stream history, replay, statistics, logs, and block data.
 
 | Endpoint | Description |
 |----------|-------------|
-| [GetSettings](rules/GetSettings.md) | Get project settings |
-| [SetSettings](rules/SetSettings.md) | Update settings |
+| [ReplayHistory](rules/ReplayHistory.md) | Replay history |
 
----
 
 ## Example: Create ERC20 Transfer Monitor
 
