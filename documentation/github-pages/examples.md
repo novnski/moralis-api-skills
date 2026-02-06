@@ -12,7 +12,7 @@ Ask Claude these natural language queries to interact with the Moralis Web3 API.
 Add your API key to a `.env` file — the skill will offer to create it for you, or do it manually:
 
 ```bash
-echo "MORALIS_API_KEY=your_key_here" >> ~/.claude/.env
+echo "MORALIS_API_KEY=your_key_here" >> .env
 ```
 
 Without the key, the skill can't call the Moralis API on your behalf.

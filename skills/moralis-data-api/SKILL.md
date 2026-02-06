@@ -45,10 +45,7 @@ If they don't have a key yet, point them to [admin.moralis.com/register](https:/
 
 The `.env` file location depends on how skills are installed:
 
-| Installation | `.env` location |
-|---|---|
-| Project skills (`<project>/.claude/skills/`) | `<project>/.claude/.env` |
-| Global skills (`~/.claude/skills/`) | `~/.claude/.env` |
+Create the `.env` file in the project root (same directory the user runs Claude Code from). Make sure `.env` is in `.gitignore`.
 
 ### Verify Your Key
 
