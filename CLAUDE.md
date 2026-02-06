@@ -123,13 +123,13 @@ allowed-tools: Bash Read Grep Glob
 
 Query clients use REST APIs via Node.js `https` module. The pattern:
 
-1. Accept API key from user input (stored in session memory)
+1. Read API key from `$MORALIS_API_KEY` environment variable (loaded from project `.env`)
 2. Build URL with path/query params
 3. Make HTTPS request with `X-API-Key` header
 4. Handle pagination with `cursor` parameter
 5. Return formatted results
 
-**Note:** The API key is managed in-memory per session and shared between both skills. Users provide the key via natural language when using either skill.
+**Note:** Never ask the user to paste their API key into the chat. The key should live in a `.env` file in the project root. If `$MORALIS_API_KEY` is not set, offer to create the `.env` file with an empty placeholder and let the user fill it in themselves.
 
 ## Pagination Pattern
 
@@ -145,18 +145,13 @@ curl "...?limit=100&cursor=<cursor>"
 
 ## Environment Variable Discovery
 
-Skills find the `.env` file by searching upward:
+The API key should be in a `.env` file in the project root:
 
-```javascript
-// Priority 1: Project-level skills
-<project>/.claude/skills/        → <project>/.claude/.env
-
-// Priority 2: Global skills
-~/.claude/skills/                → ~/.claude/.env
-
-// Fallback
-process.cwd()
 ```
+MORALIS_API_KEY=your_key_here
+```
+
+Make sure `.env` is in `.gitignore`.
 
 ## Adding New Endpoints
 
